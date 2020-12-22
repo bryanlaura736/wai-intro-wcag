@@ -1,0 +1,6 @@
+species	amphilophus_citrinellus
+assembly	Midas_v5
+sift	
+polyphen	
+source_genebuild	2018-07
+source_assembly	Midas_v5

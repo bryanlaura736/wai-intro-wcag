@@ -1,0 +1,4635 @@
+From fred at fdrake.net  Thu Mar  1 09:12:27 2018
+From: fred at fdrake.net (Fred Drake)
+Date: Thu, 1 Mar 2018 09:12:27 -0500
+Subject: [Distutils] /etc files
+In-Reply-To: <1519853352.2276.15.camel@narod.ru>
+References: <1519853352.2276.15.camel@narod.ru>
+Message-ID: <CAFT4OTHGu9jMRkyyeL7fZKekA8_uH-2DuoVj5QXuMbCHk1tBSw@mail.gmail.com>
+
+On Wed, Feb 28, 2018 at 4:29 PM, Victor Porton <porton at narod.ru> wrote:
+> How to deal with files to be placed into /etc or a similar dir?
+
+setuptools is really an extension of distutils, and for this, the
+distutils documentation provides what you need to know:
+
+    https://docs.python.org/3/distutils/setupscript.html#installing-additional-files
+
+Good luck!
+
+
+  -Fred
+
+-- 
+Fred L. Drake, Jr.    <fred at fdrake.net>
+"A storm broke loose in my mind."  --Albert Einstein
+
+From sh at changeset.nyc  Thu Mar  1 11:55:41 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Thu, 1 Mar 2018 11:55:41 -0500
+Subject: [Distutils] Warehouse testing livechat/office hours in IRC today
+Message-ID: <d882c04a-c29b-7e1d-7f9d-b073a0ec22d6@changeset.nyc>
+
+In about 5 minutes in #pypa-dev on Freenode, the maintainers of the new
+PyPI pypi.org want to hear about any problems Python package maintainers
+are having with it, and help you learn to hack on Warehouse. We're
+holding a livechat/office hour; please drop in:
+https://webchat.freenode.net/?channels=#pypa-dev
+
+There'll be another one in a few hours. Timings:
+
+    Thursday March 1st: 1700 UTC / noon-1pm EST
+
+    Thursday March 1st: 2300 UTC / 6pm-7pm EST
+
+The PSF blog post
+https://pyfound.blogspot.com/2018/02/python-package-maintainers-help-test.html
+has more info.
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From njs at pobox.com  Thu Mar  1 14:41:41 2018
+From: njs at pobox.com (Nathaniel Smith)
+Date: Thu, 1 Mar 2018 11:41:41 -0800
+Subject: [Distutils] /etc files
+In-Reply-To: <CAPJVwBn3ukc12EQs=CsScn_zgOFKoJQ751bSJijqNaWq5S+hYw@mail.gmail.com>
+References: <1519853402.2276.16.camel@narod.ru>
+ <CAPJVwBk2-M2vGudZo=MSSud3aLpTjGM8vUg+Ucb0MBBz64wm0w@mail.gmail.com>
+ <CAPJVwBn3ukc12EQs=CsScn_zgOFKoJQ751bSJijqNaWq5S+hYw@mail.gmail.com>
+Message-ID: <CAPJVwB=8jOUvJcuJx1RjeWt9TDV2tzX+Uu6gi+mev0vsMu294g@mail.gmail.com>
+
+Note that this will make it impossible to distribute wheels of your package
+or to install it into a virtualenv, because those don't have an /etc. So
+it's mostly only suitable for projects that you use internally under a
+known and restricted set of deployment options, not for anything
+distributed on pypi.
+
+
+On Mar 1, 2018 5:01 AM, "Victor Porton" <porton at narod.ru> wrote:
+
+How to deal with the files to be placed into /etc or a similar dir?
+
+In the previous email I forgot to say I use setuptools not distutils.
+_______________________________________________
+Distutils-SIG maillist  -  Distutils-SIG at python.org
+https://mail.python.org/mailman/listinfo/distutils-sig
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180301/e25c5d15/attachment.html>
+
+From j.orponen at 4teamwork.ch  Fri Mar  2 08:12:56 2018
+From: j.orponen at 4teamwork.ch (Joni Orponen)
+Date: Fri, 2 Mar 2018 14:12:56 +0100
+Subject: [Distutils] /etc files
+In-Reply-To: <1519853402.2276.16.camel@narod.ru>
+References: <1519853402.2276.16.camel@narod.ru>
+Message-ID: <CA+LW3i3wcZFtqy-LY6HiJ+uXAanqZwOnxHBTji=FVwSLFi8AqQ@mail.gmail.com>
+
+On Wed, Feb 28, 2018 at 10:30 PM, Victor Porton <porton at narod.ru> wrote:
+
+> How to deal with the files to be placed into /etc or a similar dir?
+>
+
+Provide example / template files and document the intended deployment
+strategy for people who will deploy this software / distribution package
+managers.
+
+-- 
+Joni Orponen
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180302/910f4ca0/attachment.html>
+
+From sh at changeset.nyc  Fri Mar  2 17:32:51 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Fri, 2 Mar 2018 17:32:51 -0500
+Subject: [Distutils] Twine 1.10.0rc1 on Test PyPI
+Message-ID: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+
+(So it turns out I've taken on a volunteer gig, which is that I'm now
+one of the Twine maintainers. I may be wrong about how to do this -
+please feel free to comment on https://github.com/pypa/twine/pull/314
+which is where I'm pulling together a new release checklist for myself.)
+
+https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+
+This is a release candidate for Twine 1.10.0 which I'm planning to
+release early next week.
+
+This release improves project registration usage text (in some cases
+removing it where inapplicable), and updates `--repository[-url]` usage
+text, prints progress to `stdout` instead of `stderr`, improves the
+progressbar, and reorganizes and improves user and developer documentation.
+
+Please see the changelog
+https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+under "Next feature release".
+
+I believe this is how you test it out:
+
+  pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+--extra-index-url https://pypi.org/simple twine
+
+Please check existing open issues at
+https://github.com/pypa/twine/issues and open new ones if you have
+problems. Thanks!
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From sh at changeset.nyc  Sat Mar  3 11:06:36 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Sat, 3 Mar 2018 11:06:36 -0500
+Subject: [Distutils] Twine 1.10.0rc1 on Test PyPI
+In-Reply-To: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+References: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+Message-ID: <49f836d6-0518-04a1-a493-45b92213280d@changeset.nyc>
+
+Wrong URL (did I mention I'm new at this?). View 1.10.0rc1, including a
+fairly spiffy new README, at:
+https://test.pypi.org/project/twine/1.10.0rc1/ -- and please pass word
+along to our downstreams.
+
+-Sumana
+
+On 03/02/2018 05:32 PM, Sumana Harihareswara wrote:
+> (So it turns out I've taken on a volunteer gig, which is that I'm now
+> one of the Twine maintainers. I may be wrong about how to do this -
+> please feel free to comment on https://github.com/pypa/twine/pull/314
+> which is where I'm pulling together a new release checklist for myself.)
+> 
+> https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+> 
+> This is a release candidate for Twine 1.10.0 which I'm planning to
+> release early next week.
+> 
+> This release improves project registration usage text (in some cases
+> removing it where inapplicable), and updates `--repository[-url]` usage
+> text, prints progress to `stdout` instead of `stderr`, improves the
+> progressbar, and reorganizes and improves user and developer documentation.
+> 
+> Please see the changelog
+> https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+> under "Next feature release".
+> 
+> I believe this is how you test it out:
+> 
+>   pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+> --extra-index-url https://pypi.org/simple twine
+> 
+> Please check existing open issues at
+> https://github.com/pypa/twine/issues and open new ones if you have
+> problems. Thanks!
+
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From jaraco at jaraco.com  Sat Mar  3 13:30:26 2018
+From: jaraco at jaraco.com (Jason R. Coombs)
+Date: Sat, 3 Mar 2018 18:30:26 +0000
+Subject: [Distutils] Twine 1.10.0rc1 on Test PyPI
+In-Reply-To: <D2AC7C9E-6140-47FB-BBD6-FB55751D7CC0@jaraco.com>
+References: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+ <49f836d6-0518-04a1-a493-45b92213280d@changeset.nyc>
+ <D2AC7C9E-6140-47FB-BBD6-FB55751D7CC0@jaraco.com>
+Message-ID: <49D140D1-FD9E-44D4-8BCC-FDE9382885B7@jaraco.com>
+
+I tried but as you can see in this job<https://travis-ci.org/yougov/paradocx/jobs/348705862>, the environment variables aren?t honored, so it seems I cannot test a twine release in Travis. At this point, I think I?ll just wait for the official release.
+
+On 3 Mar, 2018, at 11:17, Jason R. Coombs <jaraco at jaraco.com<mailto:jaraco at jaraco.com>> wrote:
+
+
+This sender failed our fraud detection checks and may not be who they appear to be. Learn about spoofing<http://aka.ms/LearnAboutSpoofing>
+        Feedback<http://aka.ms/SafetyTipsFeedback>
+Thanks for working on this!
+
+In my particular use-case, I rarely run twine myself, but instead rely on the Travis-CI DPL routine<https://github.com/travis-ci/dpl/blob/master/lib/dpl/provider/pypi.rb>. Looking at that code, I don?t see any means I have to test a pre-release version.
+
+Given the presumably broad impact this one use-case has, it would be nice if there were a way to test it against pre-release versions of twine (and maybe also wheel, pip, and setuptools). Perhaps it would be worthwhile to propose a hook to that project to enable the versions of those projects to be specified for selective testing.
+
+Oh, I just had an idea - perhaps one could set the PIP_PRE environment variable and that would affect the install and allow the pre-release to be tested. I?ll give that a go.
+
+On 3 Mar, 2018, at 11:06, Sumana Harihareswara <sh at changeset.nyc<mailto:sh at changeset.nyc>> wrote:
+
+Wrong URL (did I mention I'm new at this?). View 1.10.0rc1, including a
+fairly spiffy new README, at:
+https://test.pypi.org/project/twine/1.10.0rc1/ -- and please pass word
+along to our downstreams.
+
+-Sumana
+
+On 03/02/2018 05:32 PM, Sumana Harihareswara wrote:
+(So it turns out I've taken on a volunteer gig, which is that I'm now
+one of the Twine maintainers. I may be wrong about how to do this -
+please feel free to comment on https://github.com/pypa/twine/pull/314
+which is where I'm pulling together a new release checklist for myself.)
+
+https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+
+This is a release candidate for Twine 1.10.0 which I'm planning to
+release early next week.
+
+This release improves project registration usage text (in some cases
+removing it where inapplicable), and updates `--repository[-url]` usage
+text, prints progress to `stdout` instead of `stderr`, improves the
+progressbar, and reorganizes and improves user and developer documentation.
+
+Please see the changelog
+https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+under "Next feature release".
+
+I believe this is how you test it out:
+
+ pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+--extra-index-url https://pypi.org/simple twine
+
+Please check existing open issues at
+https://github.com/pypa/twine/issues and open new ones if you have
+problems. Thanks!
+
+
+--
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc<https://changeset.nyc/>
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180303/e3e7f914/attachment.html>
+
+From cosimo at anthrotype.com  Sat Mar  3 15:09:42 2018
+From: cosimo at anthrotype.com (Cosimo Lupo)
+Date: Sat, 3 Mar 2018 20:09:42 +0000
+Subject: [Distutils] Twine 1.10.0rc1 on Test PyPI
+In-Reply-To: <49D140D1-FD9E-44D4-8BCC-FDE9382885B7@jaraco.com>
+References: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+ <49f836d6-0518-04a1-a493-45b92213280d@changeset.nyc>
+ <D2AC7C9E-6140-47FB-BBD6-FB55751D7CC0@jaraco.com>
+ <49D140D1-FD9E-44D4-8BCC-FDE9382885B7@jaraco.com>
+Message-ID: <152f8faf-674e-4a58-89d9-bfc2886bd9b1@Spark>
+
+Maybe you could try writing a pip configuration file in $HOME/.config/pip/pip.conf (or /etc/pip.conf). Travis dpl must be using pip to download twine, and pip should be able to look there for a `pre` option.
+(I just guess, haven?t tried myself)
+
+--
+
+
+Cosimo
+
+Il 3 mar 2018, 18:30 +0000, Jason R. Coombs <jaraco at jaraco.com>, ha scritto:
+> I tried?but as you can see in?this job, the environment variables aren?t honored, so it seems I cannot test a twine release in Travis. At this point, I think I?ll just wait for the official release.
+>
+> > On 3 Mar, 2018, at 11:17, Jason R. Coombs <jaraco at jaraco.com> wrote:
+> >
+> > This?sender?failed?our?fraud?detection?checks?and?may?not?be?who?they?appear?to?be.?Learn?about?spoofing
+> > Feedback
+> > Thanks for working on this!
+> >
+> > In my particular use-case, I rarely run twine myself, but instead rely on the?Travis-CI DPL routine. Looking at that code, I don?t see any means I have to test a pre-release version.
+> >
+> > Given the presumably broad impact this one use-case has, it would be nice if there were a way to test it against pre-release versions of twine (and maybe also wheel, pip, and setuptools). Perhaps it would be worthwhile to propose a hook to that project to enable the versions of those projects to be specified for selective testing.
+> >
+> > Oh, I just had an idea - perhaps one could set the PIP_PRE environment variable and that would affect the install and allow the pre-release to be tested. I?ll give that a go.
+> >
+> > > On 3 Mar, 2018, at 11:06, Sumana Harihareswara <sh at changeset.nyc> wrote:
+> > >
+> > > Wrong URL (did I mention I'm new at this?). View 1.10.0rc1, including a
+> > > fairly spiffy new README, at:
+> > > https://test.pypi.org/project/twine/1.10.0rc1/ -- and please pass word
+> > > along to our downstreams.
+> > >
+> > > -Sumana
+> > >
+> > > On 03/02/2018 05:32 PM, Sumana Harihareswara wrote:
+> > > > (So it turns out I've taken on a volunteer gig, which is that I'm now
+> > > > one of the Twine maintainers. I may be wrong about how to do this -
+> > > > please feel free to comment on https://github.com/pypa/twine/pull/314
+> > > > which is where I'm pulling together a new release checklist for myself.)
+> > > >
+> > > > https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+> > > >
+> > > > This is a release candidate for Twine 1.10.0 which I'm planning to
+> > > > release early next week.
+> > > >
+> > > > This release improves project registration usage text (in some cases
+> > > > removing it where inapplicable), and updates `--repository[-url]` usage
+> > > > text, prints progress to `stdout` instead of `stderr`, improves the
+> > > > progressbar, and reorganizes and improves user and developer documentation.
+> > > >
+> > > > Please see the changelog
+> > > > https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+> > > > under "Next feature release".
+> > > >
+> > > > I believe this is how you test it out:
+> > > >
+> > > > ?pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+> > > > --extra-index-url https://pypi.org/simple twine
+> > > >
+> > > > Please check existing open issues at
+> > > > https://github.com/pypa/twine/issues and open new ones if you have
+> > > > problems. Thanks!
+> > >
+> > >
+> > > --
+> > > Sumana Harihareswara
+> > > Changeset Consulting
+> > > https://changeset.nyc
+> >
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180303/a4a27b8d/attachment-0001.html>
+
+From jaraco at jaraco.com  Sat Mar  3 11:17:57 2018
+From: jaraco at jaraco.com (Jason R. Coombs)
+Date: Sat, 3 Mar 2018 16:17:57 +0000
+Subject: [Distutils] Twine 1.10.0rc1 on Test PyPI
+In-Reply-To: <49f836d6-0518-04a1-a493-45b92213280d@changeset.nyc>
+References: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+ <49f836d6-0518-04a1-a493-45b92213280d@changeset.nyc>
+Message-ID: <D2AC7C9E-6140-47FB-BBD6-FB55751D7CC0@jaraco.com>
+
+Thanks for working on this!
+
+In my particular use-case, I rarely run twine myself, but instead rely on the Travis-CI DPL routine<https://github.com/travis-ci/dpl/blob/master/lib/dpl/provider/pypi.rb>. Looking at that code, I don?t see any means I have to test a pre-release version.
+
+Given the presumably broad impact this one use-case has, it would be nice if there were a way to test it against pre-release versions of twine (and maybe also wheel, pip, and setuptools). Perhaps it would be worthwhile to propose a hook to that project to enable the versions of those projects to be specified for selective testing.
+
+Oh, I just had an idea - perhaps one could set the PIP_PRE environment variable and that would affect the install and allow the pre-release to be tested. I?ll give that a go.
+
+On 3 Mar, 2018, at 11:06, Sumana Harihareswara <sh at changeset.nyc<mailto:sh at changeset.nyc>> wrote:
+
+Wrong URL (did I mention I'm new at this?). View 1.10.0rc1, including a
+fairly spiffy new README, at:
+https://test.pypi.org/project/twine/1.10.0rc1/ -- and please pass word
+along to our downstreams.
+
+-Sumana
+
+On 03/02/2018 05:32 PM, Sumana Harihareswara wrote:
+(So it turns out I've taken on a volunteer gig, which is that I'm now
+one of the Twine maintainers. I may be wrong about how to do this -
+please feel free to comment on https://github.com/pypa/twine/pull/314
+which is where I'm pulling together a new release checklist for myself.)
+
+https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+
+This is a release candidate for Twine 1.10.0 which I'm planning to
+release early next week.
+
+This release improves project registration usage text (in some cases
+removing it where inapplicable), and updates `--repository[-url]` usage
+text, prints progress to `stdout` instead of `stderr`, improves the
+progressbar, and reorganizes and improves user and developer documentation.
+
+Please see the changelog
+https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+under "Next feature release".
+
+I believe this is how you test it out:
+
+ pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+--extra-index-url https://pypi.org/simple twine
+
+Please check existing open issues at
+https://github.com/pypa/twine/issues and open new ones if you have
+problems. Thanks!
+
+
+--
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180303/dab3c2d6/attachment.html>
+
+From sh at changeset.nyc  Sun Mar  4 21:33:24 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Sun, 4 Mar 2018 21:33:24 -0500
+Subject: [Distutils] Twine 1.10.0rc1 on Test PyPI
+In-Reply-To: <152f8faf-674e-4a58-89d9-bfc2886bd9b1@Spark>
+References: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+ <49f836d6-0518-04a1-a493-45b92213280d@changeset.nyc>
+ <D2AC7C9E-6140-47FB-BBD6-FB55751D7CC0@jaraco.com>
+ <49D140D1-FD9E-44D4-8BCC-FDE9382885B7@jaraco.com>
+ <152f8faf-674e-4a58-89d9-bfc2886bd9b1@Spark>
+Message-ID: <c33fdeb2-8988-d1dd-3e3d-714cbd01398c@changeset.nyc>
+
+My current guess is that if the RC were on https://pypi.org, rather than
+https://test.pypi.org, Travis would be able to grab it using PIP_PRE.
+-Sumana
+
+On 03/03/2018 03:09 PM, Cosimo Lupo wrote:
+> Maybe you could try writing a pip configuration file in $HOME/.config/pip/pip.conf (or /etc/pip.conf). Travis dpl must be using pip to download twine, and pip should be able to look there for a `pre` option.
+> (I just guess, haven?t tried myself)
+> 
+> --
+> 
+> 
+> Cosimo
+> 
+> Il 3 mar 2018, 18:30 +0000, Jason R. Coombs <jaraco at jaraco.com>, ha scritto:
+>> I tried?but as you can see in?this job, the environment variables aren?t honored, so it seems I cannot test a twine release in Travis. At this point, I think I?ll just wait for the official release.
+>>
+>>> On 3 Mar, 2018, at 11:17, Jason R. Coombs <jaraco at jaraco.com> wrote:
+>>>
+>>> This?sender?failed?our?fraud?detection?checks?and?may?not?be?who?they?appear?to?be.?Learn?about?spoofing
+>>> Feedback
+>>> Thanks for working on this!
+>>>
+>>> In my particular use-case, I rarely run twine myself, but instead rely on the?Travis-CI DPL routine. Looking at that code, I don?t see any means I have to test a pre-release version.
+>>>
+>>> Given the presumably broad impact this one use-case has, it would be nice if there were a way to test it against pre-release versions of twine (and maybe also wheel, pip, and setuptools). Perhaps it would be worthwhile to propose a hook to that project to enable the versions of those projects to be specified for selective testing.
+>>>
+>>> Oh, I just had an idea - perhaps one could set the PIP_PRE environment variable and that would affect the install and allow the pre-release to be tested. I?ll give that a go.
+>>>
+>>>> On 3 Mar, 2018, at 11:06, Sumana Harihareswara <sh at changeset.nyc> wrote:
+>>>>
+>>>> Wrong URL (did I mention I'm new at this?). View 1.10.0rc1, including a
+>>>> fairly spiffy new README, at:
+>>>> https://test.pypi.org/project/twine/1.10.0rc1/ -- and please pass word
+>>>> along to our downstreams.
+>>>>
+>>>> -Sumana
+>>>>
+>>>> On 03/02/2018 05:32 PM, Sumana Harihareswara wrote:
+>>>>> (So it turns out I've taken on a volunteer gig, which is that I'm now
+>>>>> one of the Twine maintainers. I may be wrong about how to do this -
+>>>>> please feel free to comment on https://github.com/pypa/twine/pull/314
+>>>>> which is where I'm pulling together a new release checklist for myself.)
+>>>>>
+>>>>> https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+>>>>>
+>>>>> This is a release candidate for Twine 1.10.0 which I'm planning to
+>>>>> release early next week.
+>>>>>
+>>>>> This release improves project registration usage text (in some cases
+>>>>> removing it where inapplicable), and updates `--repository[-url]` usage
+>>>>> text, prints progress to `stdout` instead of `stderr`, improves the
+>>>>> progressbar, and reorganizes and improves user and developer documentation.
+>>>>>
+>>>>> Please see the changelog
+>>>>> https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+>>>>> under "Next feature release".
+>>>>>
+>>>>> I believe this is how you test it out:
+>>>>>
+>>>>> ?pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+>>>>> --extra-index-url https://pypi.org/simple twine
+>>>>>
+>>>>> Please check existing open issues at
+>>>>> https://github.com/pypa/twine/issues and open new ones if you have
+>>>>> problems. Thanks!
+>>>>
+>>>>
+>>>> --
+>>>> Sumana Harihareswara
+>>>> Changeset Consulting
+>>>> https://changeset.nyc
+
+From sh at changeset.nyc  Wed Mar  7 14:51:41 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Wed, 07 Mar 2018 14:51:41 -0500
+Subject: [Distutils] Fwd: PyPI & Warehouse update: redirecting & shutting
+ down legacy by end of April
+Message-ID: <1520452301.908968.1295167264.6AFE39DF@webmail.messagingengine.com>
+
+Forwarding from pypa-dev (archived https://groups.google.com/forum/#!topic/pypa-dev/L9sF30_Yr2A ).
+
+-- 
+Sumana Harihareswara
+
+----- Original message -----
+From: Sumana Harihareswara <sh at changeset.nyc>
+To: "pypa-dev" <pypa-dev at googlegroups.com>
+Subject: PyPI & Warehouse update: redirecting & shutting down legacy by end of April
+Date: Wed, 07 Mar 2018 14:48:34 -0500
+
+The big PyPI news is that we're probably getting to the beta, which we'll publicize heavily, in the next 2 weeks, and redirecting traffic to the new PyPI and shutting down legacy PyPI by the end of April.[0] (Which is good, because that's about when our funding from Mozilla's Open Source Support[1][2] grant will probably run out.) We're working on making a list of third-party services to alert; please help us out.[3]
+
+The PyCon North America talk schedule is out -- including Dustin Ingram's "Inside the Cheeseshop: How Python Packaging Works".[4] And we hope you'll join us to hack on packaging and distribution at the sprints, May 14-17.[5] And Nicole Harris is also tentatively planning to lead a Warehouse sprint at EuroPython in July.[6]
+
+We've kept on working on features, bugfixes, testing, and infrastructure; here's a selection of the last week's work. Ernest has been continuing cabotage work to manage Kubernetes credentials,[7] and our new infrastructure is stood up & heavily tested. Nicole's doing user tests and taking lessons from that and turning them into issues -- feel free to ping her if you're open to talking with her for 30-60 minutes so she can see how you use the new PyPI.[8] Dustin fixed the issue "Version lookup should take PEP 440 normalization into account" #445 with multiple fixes involving a canonical version for each release.[9] And he also updated the official Python packaging guide to cover how you indicate multiple emails in core metadata.[10] And, thanks to Ernest, PyPI legacy now has a banner for logged-in users, asking them to test pypi.org.[11]
+
+Thanks to volunteers:
+   * yeraydiazdiaz for password strength gauge[12]
+   * jw for changing "Edit" to "Manage" in project management screen[13]
+   * aalmazan for updating a checkbox to use the Stimulus framework[14]
+
+We also brought up the possibility of changing the PyPI URL structure, in case you want to weigh in.[15]
+
+Last week's office hours/IRC livechat went okay! Not as many participants as I would like, but this particular publicity/feedback structure is fairly new to the Python packagers community and I didn't do enough advance publicity. We got praise for the new PyPI, and we got bug reports and related comments and concerns (for Warehouse and related tools), and we shared tutorials and tools and command-line tips that some experienced packagers didn't know about. And we got people to subscribe to the announce mailing list.[16]
+
+Notes from the weekly Warehouse core developers' meeting are, as usual, on the wiki.[17] And you can keep up with our current and upcoming milestone progress at the GitHub rollout board overview.[18]
+
+And, thanks to Mark Mangoba, PEP 541 is going to get further progress within the Packaging WG this week.[19]
+
+We would love your help. Please test PyPI and let us know what works and doesn't work for you. Please let us know of third-party services that should get a heads-up about the changeover.[20] And please consider joining us and hacking on Warehouse.[21] We have 16 open good first issues.[22]
+
+Thanks to Mozilla for their support for the PyPI & Warehouse work, and thanks to the PSF for facilitating it!
+
+
+[0] https://wiki.python.org/psf/WarehouseRoadmap
+[1] https://pyfound.blogspot.com/2017/11/the-psf-awarded-moss-grant-pypi.html
+[2] https://blog.mozilla.org/blog/2018/01/23/moss-q4-supporting-python-ecosystem/
+[3] https://github.com/pypa/warehouse/issues/2935
+[4] https://us.pycon.org/2018/schedule/presentation/148/
+[5] https://us.pycon.org/2018/community/sprints/
+[6] https://ep2018.europython.eu/
+[7] https://github.com/cabotage/cabotage-app
+[8] https://twitter.com/nlhkabu/status/969644629644730368
+[9] Several commits necessary, including: https://github.com/pypa/warehouse/pull/3113, https://github.com/pypa/warehouse/pull/3099, https://github.com/pypa/warehouse/pull/3102, https://github.com/pypa/packaging/commits?author=di&since=2018-02-01T05:00:00Z&until=2018-03-01T05:00:00Z
+[10] https://github.com/pypa/python-packaging-user-guide/pull/429
+[11] https://github.com/pypa/pypi-legacy/commits?author=ewdurbin&since=2018-02-27T05:00:00Z&until=2018-03-08T05:00:00Z
+[12] https://github.com/pypa/warehouse/pull/3128
+[13] https://github.com/pypa/warehouse/pull/3130
+[14] https://github.com/pypa/warehouse/pull/3136
+[15] https://github.com/pypa/warehouse/issues/3143
+[16] https://mail.python.org/mm3/mailman3/lists/pypi-announce.python.org/
+[17] https://wiki.python.org/psf/PackagingWG/2018-03-06-Warehouse
+[18] https://github.com/pypa/warehouse/projects/1
+[19] https://www.python.org/dev/peps/pep-0541/
+[20] https://github.com/pypa/warehouse/issues/2935
+[21] https://warehouse.readthedocs.io/development/getting-started/
+[22] https://github.com/pypa/warehouse/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+
+
+-- 
+Sumana Harihareswara
+Warehouse project manager
+Changeset Consulting
+https://changeset.nyc
+
+From sh at changeset.nyc  Wed Mar  7 16:22:27 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Wed, 7 Mar 2018 16:22:27 -0500
+Subject: [Distutils] Twine 1.10.0 release
+In-Reply-To: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+References: <8462d4bb-3119-e433-1d89-0c533c765ecc@changeset.nyc>
+Message-ID: <a2383d1b-204a-61df-70fb-a2673fc6d367@changeset.nyc>
+
+https://pypi.org/project/twine/1.10.0/ Twine 1.10.0 is now out; thanks
+to Jason R. Coombs, Maurits van Rees, Matthew Planchard, Holger Krekel,
+Ian Stapleton Cordasco, Donald Stufft, Dustin Ingram, Pradyun Gedam,
+Leonard Richardson, Jason Owen, and Nick Coghlan for advice, testing,
+review, and other help.
+
+Please do `pip install -U twine` at your earliest convenience, speak up
+if you see bugs, and leave a thumbs-up at
+https://github.com/pypa/twine/pull/317 if you want to indicate that it
+works just fine for you. :)
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+
+On 03/02/2018 05:32 PM, Sumana Harihareswara wrote:
+> (So it turns out I've taken on a volunteer gig, which is that I'm now
+> one of the Twine maintainers. I may be wrong about how to do this -
+> please feel free to comment on https://github.com/pypa/twine/pull/314
+> which is where I'm pulling together a new release checklist for myself.)
+> 
+> https://test.pypi.org/manage/project/twine/release/1.10.0rc1/
+> 
+> This is a release candidate for Twine 1.10.0 which I'm planning to
+> release early next week.
+> 
+> This release improves project registration usage text (in some cases
+> removing it where inapplicable), and updates `--repository[-url]` usage
+> text, prints progress to `stdout` instead of `stderr`, improves the
+> progressbar, and reorganizes and improves user and developer documentation.
+> 
+> Please see the changelog
+> https://twine.readthedocs.io/en/latest/changelog.html for detailed notes
+> under "Next feature release".
+> 
+> I believe this is how you test it out:
+> 
+>   pip install --upgrade --pre --index-url https://test.pypi.org/simple/
+> --extra-index-url https://pypi.org/simple twine
+> 
+> Please check existing open issues at
+> https://github.com/pypa/twine/issues and open new ones if you have
+> problems. Thanks!
+> 
+
+
+From jcroteau at gmail.com  Fri Mar  9 14:57:44 2018
+From: jcroteau at gmail.com (Joel Croteau)
+Date: Fri, 09 Mar 2018 19:57:44 +0000
+Subject: [Distutils] It should be possible to set a custom pypirc location
+Message-ID: <CACBp_uB_k79FcqD4-enXBOX+XbvDx90aa7z7GGrZkXUhz5cdyg@mail.gmail.com>
+
+Hardcoding ~/.pypirc as the only possible location for repo configs makes
+certain use cases, like deploying to a custom repo from Jenkins, difficult.
+It should be possible to set a custom pypirc location, either through an
+environment variable, or an argument to setup.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180309/a482c98f/attachment.html>
+
+From wes.turner at gmail.com  Sun Mar 11 08:11:32 2018
+From: wes.turner at gmail.com (Wes Turner)
+Date: Sun, 11 Mar 2018 08:11:32 -0400
+Subject: [Distutils] It should be possible to set a custom pypirc location
+In-Reply-To: <CACBp_uB_k79FcqD4-enXBOX+XbvDx90aa7z7GGrZkXUhz5cdyg@mail.gmail.com>
+References: <CACBp_uB_k79FcqD4-enXBOX+XbvDx90aa7z7GGrZkXUhz5cdyg@mail.gmail.com>
+Message-ID: <CACfEFw_GfQm_cFG93mKWWmtohc=by8=YCWwLd=WYSvfg5U8L9A@mail.gmail.com>
+
+"Custom location for .pypirc file"
+https://stackoverflow.com/questions/37845125/custom-location-for-pypirc-file
+
+- https://github.com/pypa/setuptools/blob/master/
+setuptools/package_index.py#L997
+<https://github.com/pypa/setuptools/blob/master/setuptools/package_index.py#L997>
+
+https://github.com/pypa/setuptools/issues/new
+
+These are the pip.conf file paths:
+https://pip.pypa.io/en/stable/user_guide/#config-file
+
+... pip combines all of the pip.conf/pip.ini files that it finds.
+
+
+
+On Friday, March 9, 2018, Joel Croteau <jcroteau at gmail.com> wrote:
+
+> Hardcoding ~/.pypirc as the only possible location for repo configs makes
+> certain use cases, like deploying to a custom repo from Jenkins, difficult.
+> It should be possible to set a custom pypirc location, either through an
+> environment variable, or an argument to setup.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180311/038dece0/attachment.html>
+
+From matt.mccormick at kitware.com  Mon Mar 12 10:26:06 2018
+From: matt.mccormick at kitware.com (Matt McCormick)
+Date: Mon, 12 Mar 2018 10:26:06 -0400
+Subject: [Distutils] PyPI support for linux_ppc64le
+Message-ID: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+
+Hi,
+
+I created a wheel for Linux / ppc64le (built on CentOS 7). When I try
+to upload to PyPI via twine, the error message results:
+
+  unsupported platform tag 'linux_ppc64le'
+
+
+What is the status of the ppc64le wheel support? Is pip / PyPI support
+expected soon?
+
+
+Thanks,
+Matt
+
+From p.f.moore at gmail.com  Mon Mar 12 10:31:05 2018
+From: p.f.moore at gmail.com (Paul Moore)
+Date: Mon, 12 Mar 2018 14:31:05 +0000
+Subject: [Distutils] PyPI support for linux_ppc64le
+In-Reply-To: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+References: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+Message-ID: <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+
+On 12 March 2018 at 14:26, Matt McCormick <matt.mccormick at kitware.com> wrote:
+> Hi,
+>
+> I created a wheel for Linux / ppc64le (built on CentOS 7). When I try
+> to upload to PyPI via twine, the error message results:
+>
+>   unsupported platform tag 'linux_ppc64le'
+>
+>
+> What is the status of the ppc64le wheel support? Is pip / PyPI support
+> expected soon?
+
+PyPI supports Linux wheels in the form of "manylinux" builds. I don't
+think there's any plan to support platform or distribution specific
+Linux wheels beyond that. Having said that, I'm sure the Lunux
+specialists will be able to give more detail (maybe one of the
+manylinux versions handles ppc64le?)
+
+Paul
+
+From alex.gronholm at nextday.fi  Mon Mar 12 10:35:14 2018
+From: alex.gronholm at nextday.fi (=?UTF-8?Q?Alex_Gr=c3=b6nholm?=)
+Date: Mon, 12 Mar 2018 16:35:14 +0200
+Subject: [Distutils] PyPI support for linux_ppc64le
+In-Reply-To: <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+References: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+ <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+Message-ID: <31ab6c26-d1dd-581d-5444-b1b8d5b41734@nextday.fi>
+
+The manylinux1 platform only supports x86-64 and x86-32 (i686) 
+architectures. A quote from PEP 513:
+
+Because CentOS 5 is only available for x86_64 and i686 architectures, 
+these are the only architectures currently supported by the manylinux1 
+policy.
+
+If support is to be extended to other architectures, it requires a new 
+standard (which has recently been discussed on this ML).
+
+
+Paul Moore kirjoitti 12.03.2018 klo 16:31:
+> On 12 March 2018 at 14:26, Matt McCormick <matt.mccormick at kitware.com> wrote:
+>> Hi,
+>>
+>> I created a wheel for Linux / ppc64le (built on CentOS 7). When I try
+>> to upload to PyPI via twine, the error message results:
+>>
+>>    unsupported platform tag 'linux_ppc64le'
+>>
+>>
+>> What is the status of the ppc64le wheel support? Is pip / PyPI support
+>> expected soon?
+> PyPI supports Linux wheels in the form of "manylinux" builds. I don't
+> think there's any plan to support platform or distribution specific
+> Linux wheels beyond that. Having said that, I'm sure the Lunux
+> specialists will be able to give more detail (maybe one of the
+> manylinux versions handles ppc64le?)
+>
+> Paul
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180312/59602f7c/attachment.html>
+
+From thomas at kluyver.me.uk  Mon Mar 12 10:42:51 2018
+From: thomas at kluyver.me.uk (Thomas Kluyver)
+Date: Mon, 12 Mar 2018 14:42:51 +0000
+Subject: [Distutils] PyPI support for linux_ppc64le
+In-Reply-To: <31ab6c26-d1dd-581d-5444-b1b8d5b41734@nextday.fi>
+References: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+ <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+ <31ab6c26-d1dd-581d-5444-b1b8d5b41734@nextday.fi>
+Message-ID: <1520865771.3865944.1300124352.1404035B@webmail.messagingengine.com>
+
+On Mon, Mar 12, 2018, at 2:35 PM, Alex Gr?nholm wrote:
+> The manylinux1 platform only supports x86-64 and x86-32 (i686)
+> architectures. A quote from PEP 513:> Because CentOS 5 is only available for x86_64 and i686 architectures,
+> these are the only architectures currently supported by the
+> manylinux1 policy.> If support is to be extended to other architectures, it requires a new
+> standard (which has recently been discussed on this ML).
+There was discussion nearly a year ago about adding a manylinux3
+variant, based on CentOS 7, with ppc64le support:https://mail.python.org/pipermail/distutils-sig/2017-March/030315.html
+
+More recently, there was discussion of a manylinux variant based on
+CentOS 6 to provide a newer base without expanding the supported
+architectures:https://mail.python.org/pipermail/distutils-sig/2018-January/031943.html
+The latter discussion largely got stuck on whether we should switch from
+numbered variants (manylinux2) to using dates in the name
+(manylinux2014). If we can reach an agreement on that point, I think we
+can probably move towards defining more manylinux variants.
+Thomas
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180312/5897df67/attachment.html>
+
+From sh at changeset.nyc  Tue Mar 13 10:04:24 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Tue, 13 Mar 2018 10:04:24 -0400
+Subject: [Distutils] Packaging/Warehouse sprint at PyCon 2018
+In-Reply-To: <a16b703b-a15f-d0df-276e-507ba63797d9@changeset.nyc>
+References: <9c6f5ec0-e598-3753-3b0e-8e423fc5bc66@changeset.nyc>
+ <a16b703b-a15f-d0df-276e-507ba63797d9@changeset.nyc>
+Message-ID: <32d57aed-0aca-164c-2f38-6a8de9131a5f@changeset.nyc>
+
+https://wiki.python.org/psf/PackagingSprints is where I've started a
+list of our upcoming planned sprints (right now, PyCon North America and
+EuroPython), with who's attending each and what we might work on there.
+
+At PyCon in Cleveland, possible work includes:
+
+* User testing
+* Updating the PyPA roadmap
+* Packaging Problems triage
+* PyPI API keys and two-factor auth, with Luke Sneeringer & Donald Stufft
+* Architecture for new Warehouse API URL structure
+
+-Sumana
+
+On 02/13/2018 11:22 PM, Sumana Harihareswara wrote:
+> Reminder: this Thursday, Feb. 15th, is the last day to request financial
+> aid to attend PyCon https://us.pycon.org/2018/financial-assistance/ and
+> thus the sprints. If money's a reason you're assuming you can't come
+> join us and improve Warehouse and other Python packaging/distribution
+> tools, I hope you'll apply for financial assistance.
+> 
+> On 01/30/2018 01:39 PM, Sumana Harihareswara wrote:
+>> In case you're planning your PyCon Cleveland travel: we are planning to
+>> hold a Warehouse/packaging sprint at PyCon (the sprints are Monday, May
+>> 14th - Thursday, May 17th 2018).
+>>
+>> We welcome package maintainers, backend and frontend web developers,
+>> infrastructure administrators, technical writers, and testers to help us
+>> make the new PyPI, and the packaging ecosystem more generally, as usable
+>> and robust as possible. I took the liberty of updating
+>> https://us.pycon.org/2018/community/sprints/ to say so.
+>>
+>> Once we're closer to the sprints I'll work on a more detailed list of
+>> things we'll work on in Cleveland.
+>>
+> 
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From sh at changeset.nyc  Wed Mar 14 02:39:05 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Wed, 14 Mar 2018 02:39:05 -0400
+Subject: [Distutils] new stuff overview, beta next week, user tests,
+ & other Warehouse updates
+Message-ID: <1521009545.3615304.1302437912.4FB5107F@webmail.messagingengine.com>
+
+The new PyPI is still working towards our big public beta[1]. We have 7
+open issues till we'll declare beta and make an outreach push (probably
+late this week or early next week), and then 19 more open issues till we
+can redirect/launch PyPI[2] probably in April (overview[3]). I've
+started preparing a draft overview of what's new in
+PyPI/packaging/distribution[4] to publicize along with the beta; it says
+"not to be publicized" but I'll let you in on the secret early. Maybe
+something in it is new to you as well!
+
+As usual, we had a Warehouse core developers' meeting on Monday[5]. The
+last week has seen a lot of polish and bugfixing and documentation for
+Warehouse. For instance, project deletion is cleaner[6], we more
+consistently indicate dangerous actions on a page[7], and there's now a
+migration guide for third-party services[8] which we told several
+projects about[9]. We've done some infrastructural work, like Datadog
+instrumentation[10],  "Conveyor" (a shim for URL redirects)[11],  and
+Cabotage improvements[12]. Here's an animated GIF demo of release phase
+commands (scale up, scale down).[13] And we improved other codebases as
+well, to fix Travis docs[14], get our HTTPS proxy service to deal with
+big embedded images[15], and deal better with parsing invalid URLs in
+READMEs[16].
+Thanks to volunteers who got pull requests merged this week:
+ * waseem[17]: we now send an email to primary email whenever primary
+   email is changed
+ * mds325[18]: clear input when the user closes the modal * dirn[19]: create a shortlink and redirect all requests for
+   /p/<project>/ to /project/<project>/ * cryvate[20]: clarify project counter for searches with tons of
+   results * Mariatta[21]: fix an email-sending issue 
+
+And thanks to our many bug reporters, such as Andrew Nesbitt who noticed
+an RSS feed discrepancy[22].
+
+Check out the current discussion[23] of API keys, a bearer token
+authentication scheme, and Macaroons in future PyPI.
+
+Want to help?
+ * Talk with Nicole about being a subject or interviewer for user
+   tests![24]  She's been focusing on user tests and it's paid off, with
+   a lot of bugs found and designs validated. * Got a good workaround for our CAPTCHA being blocked in  China[25]?
+ * Consider joining us at sprints[26] in the next few months.
+ * We have 24 good first issues open[27], and a "getting started"[28]
+   guide, and quick turnaround on code review.
+*Thanks to Mozilla Open Source Support[29] for their funding[30] for the
+PyPI & Warehouse work.*
+--
+Sumana Harihareswara
+Warehouse project manager
+Changeset Consulting
+sh at changeset.nyc
+
+P.S. Usually I compose these weekly report emails in plain text; here
+     I'm doing it in HTML with a plaintext fallback. Let me know if it's
+     better, awful, etc. Also nearly no one *replies* to these emails so
+     I'd also welcome your "hey this is useful to me!" offlist reply.
+Links:
+
+   1. https://github.com/pypa/warehouse/milestone/10
+   2. https://github.com/pypa/warehouse/milestone/1
+   3. https://github.com/pypa/warehouse/projects/1
+   4. https://wiki.python.org/psf/PackagingWG/PyPIBetaAnnouncement
+   5. https://wiki.python.org/psf/PackagingWG/2018-03-12-Warehouse
+   6. https://github.com/pypa/warehouse/pull/3212
+   7. https://github.com/pypa/warehouse/pull/3166
+   8. https://warehouse.readthedocs.io/api-reference/integration-guide/#migrating-to-the-new-pypi
+   9. https://github.com/pypa/warehouse/issues/2935
+  10. https://github.com/pypa/warehouse/pull/3076
+  11. https://github.com/pypa/conveyor/commits?author=ewdurbin&since=2018-03-06T05:00:00Z&until=2018-03-15T04:00:00Z
+  12. https://github.com/cabotage/cabotage-app/commits?author=ewdurbin&since=2018-03-06T05:00:00Z&until=2018-03-15T04:00:00Z
+  13. https://ernest.ly/imgs/cabotage-release-scale-up-scale-down.gif
+  14. https://github.com/travis-ci/docs-travis-ci-com/pull/1726
+  15. https://github.com/pypa/warehouse-camo/pull/1
+  16. https://github.com/pypa/readme_renderer/pull/65
+  17. https://github.com/pypa/warehouse/pull/3158
+  18. https://github.com/pypa/warehouse/pull/3160
+  19. https://github.com/pypa/warehouse/pull/3165
+  20. https://github.com/pypa/warehouse/pull/3193
+  21. https://github.com/pypa/warehouse/pull/3214
+  22. https://github.com/pypa/warehouse/issues/3238
+  23. https://github.com/pypa/warehouse/issues/994
+  24. http://whoisnicoleharris.com/2018/03/13/user-testing-warehouse.html
+  25. https://github.com/pypa/warehouse/issues/3174
+  26. https://wiki.python.org/psf/PackagingSprints
+  27. https://github.com/pypa/warehouse/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+  28. https://warehouse.readthedocs.io/development/getting-started/
+  29. https://blog.mozilla.org/blog/2018/01/23/moss-q4-supporting-python-ecosystem/
+  30. https://pyfound.blogspot.com/2017/11/the-psf-awarded-moss-grant-pypi.html
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180314/5ea6b5db/attachment.html>
+
+From njs at pobox.com  Wed Mar 14 03:29:47 2018
+From: njs at pobox.com (Nathaniel Smith)
+Date: Wed, 14 Mar 2018 00:29:47 -0700
+Subject: [Distutils] new stuff overview, beta next week, user tests,
+ & other Warehouse updates
+In-Reply-To: <1521009545.3615304.1302437912.4FB5107F@webmail.messagingengine.com>
+References: <1521009545.3615304.1302437912.4FB5107F@webmail.messagingengine.com>
+Message-ID: <CAPJVwB=zMgmJC15F8z+EM4f7e2J6Du20LUtB5OtiBW5X5eTJJQ@mail.gmail.com>
+
+On Tue, Mar 13, 2018 at 11:39 PM, Sumana Harihareswara <sh at changeset.nyc> wrote:
+> I've started preparing a
+> draft overview of what's new in PyPI/packaging/distribution to publicize
+> along with the beta; it says "not to be publicized" but I'll let you in on
+> the secret early. Maybe something in it is new to you as well!
+
+- Missing parentheses at the end of the GPG/PGP line
+
+- I'd put the signup link for the new announce list right at the top,
+like "this post has lots of important stuff, and if you don't want to
+miss future important stuff, sign up here."
+
+-n
+
+-- 
+Nathaniel J. Smith -- https://vorpus.org
+
+From ncoghlan at gmail.com  Wed Mar 14 10:12:50 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Thu, 15 Mar 2018 00:12:50 +1000
+Subject: [Distutils] PyPI support for linux_ppc64le
+In-Reply-To: <1520865771.3865944.1300124352.1404035B@webmail.messagingengine.com>
+References: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+ <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+ <31ab6c26-d1dd-581d-5444-b1b8d5b41734@nextday.fi>
+ <1520865771.3865944.1300124352.1404035B@webmail.messagingengine.com>
+Message-ID: <CADiSq7d3tkWYVRCyXs17jTpq2DhQnweBuoJ5uWA2zSwrcA_yBg@mail.gmail.com>
+
+On 13 March 2018 at 00:42, Thomas Kluyver <thomas at kluyver.me.uk> wrote:
+
+> On Mon, Mar 12, 2018, at 2:35 PM, Alex Gr?nholm wrote:
+>
+> The manylinux1 platform only supports x86-64 and x86-32 (i686)
+> architectures. A quote from PEP 513:
+>
+> Because CentOS 5 is only available for x86_64 and i686 architectures,
+> these are the only architectures currently supported by the manylinux1
+> policy.
+>
+> If support is to be extended to other architectures, it requires a new
+> standard (which has recently been discussed on this ML).
+>
+>
+> There was discussion nearly a year ago about adding a manylinux3 variant,
+> based on CentOS 7, with ppc64le support:
+> https://mail.python.org/pipermail/distutils-sig/2017-March/030315.html
+>
+> More recently, there was discussion of a manylinux variant based on CentOS
+> 6 to provide a newer base without expanding the supported architectures:
+> https://mail.python.org/pipermail/distutils-sig/2018-January/031943.html
+>
+> The latter discussion largely got stuck on whether we should switch from
+> numbered variants (manylinux2) to using dates in the name (manylinux2014).
+> If we can reach an agreement on that point, I think we can probably move
+> towards defining more manylinux variants.
+>
+
+Mark was OK with changing PEP 571 over to manylinux2010, but there are also
+some fixes needed for the current Platform Detection section, which isn't
+spelling out the version of glibc used as the baseline marker:
+https://mail.python.org/pipermail/distutils-sig/2018-February/031971.html
+
+Cheers,
+Nick.
+
+P.S. If folks would like to nudge that process along a bit, I suspect Mark
+may find it easier to find time to review a PR making those changes than he
+would to draft the changes himself. I don't actually know that for sure
+though - I'm just generalising from an approach that often works on me :)
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180315/816bb459/attachment-0001.html>
+
+From sh at changeset.nyc  Wed Mar 14 10:16:42 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Wed, 14 Mar 2018 10:16:42 -0400
+Subject: [Distutils] new stuff overview, beta next week, user tests,
+ & other Warehouse updates
+In-Reply-To: <CAPJVwB=zMgmJC15F8z+EM4f7e2J6Du20LUtB5OtiBW5X5eTJJQ@mail.gmail.com>
+References: <1521009545.3615304.1302437912.4FB5107F@webmail.messagingengine.com>
+ <CAPJVwB=zMgmJC15F8z+EM4f7e2J6Du20LUtB5OtiBW5X5eTJJQ@mail.gmail.com>
+Message-ID: <6c9ce893-9bf8-246f-6dea-d71e920882fc@changeset.nyc>
+
+On 03/14/2018 03:29 AM, Nathaniel Smith wrote:
+> On Tue, Mar 13, 2018 at 11:39 PM, Sumana Harihareswara <sh at changeset.nyc> wrote:
+>> I've started preparing a
+>> draft overview of what's new in PyPI/packaging/distribution to publicize
+>> along with the beta; it says "not to be publicized" but I'll let you in on
+>> the secret early. Maybe something in it is new to you as well!
+> 
+> - Missing parentheses at the end of the GPG/PGP line
+> 
+> - I'd put the signup link for the new announce list right at the top,
+> like "this post has lots of important stuff, and if you don't want to
+> miss future important stuff, sign up here."
+> 
+> -n
+
+Thanks. Fixed.
+
+Ernest W. Durbin III also pointed out in IRC
+http://kafka.dcpython.org/day/pypa-dev/2018-03-14 that the call to
+action, at least in some predecessors of this announcement, was unclear;
+I've revised
+https://wiki.python.org/psf/PackagingWG/PyPIBetaAnnouncement#Migrating
+accordingly.
+
+-- 
+Sumana Harihareswara
+Warehouse project manager
+Changeset Consulting
+https://changeset.nyc
+
+From p.f.moore at gmail.com  Fri Mar 16 05:08:47 2018
+From: p.f.moore at gmail.com (Paul Moore)
+Date: Fri, 16 Mar 2018 09:08:47 +0000
+Subject: [Distutils] Pip 10 is nearing release
+Message-ID: <CACac1F8PJJmcvfn-djMS5G4B_4f5mPZDhgOu0ZWgv1o+KKodsg@mail.gmail.com>
+
+After much work, we're pleased to announce that pip 10 is finally
+nearing release. We're planning on releasing a beta version over the
+weekend of 31 Mar/1 Apr, with the final release to follow about a
+fortnight after (assuming no major issues are found).
+
+Hopefully, as many people as possible will be able to test the new
+version of pip during the beta period (or before - it's possible to
+install pip from github if you don't want to wait!) so that we can
+ensure that pip 10 is as robust as we can manage when it gets
+released.
+
+There are a number of new features in pip 10, as well as many months
+of bug fixes and minor improvements. Highlights include:
+
+1. Support for PEP 518 (declaring build dependencies in `pyproject.toml`)
+2. Fixes for Unicode handling in build tools (notably on Windows)
+3. The previously announced reorganisation of pip's internals
+4. A new `pip config` command
+5. Default upgrade strategy becomes "only-if-needed"
+
+Thanks to everyone who has contributed to this version of pip - it's
+been a long time coming, and we apologise for the delay. The plan is
+to ensure that future releases aren't delayed as long as this one was!
+
+Paul
+
+From mail at timgolden.me.uk  Fri Mar 16 05:20:31 2018
+From: mail at timgolden.me.uk (Tim Golden)
+Date: Fri, 16 Mar 2018 09:20:31 +0000
+Subject: [Distutils] Fwd: Re:  Pip 10 is nearing release
+In-Reply-To: <70992e9d-e33a-2247-dc3d-7639dd25296e@timgolden.me.uk>
+References: <70992e9d-e33a-2247-dc3d-7639dd25296e@timgolden.me.uk>
+Message-ID: <b9c02336-a244-597a-f0e5-4ad2b40cc9ba@timgolden.me.uk>
+
+On 16/03/2018 09:08, Paul Moore wrote:
+> After much work, we're pleased to announce that pip 10 is finally
+> nearing release. We're planning on releasing a beta version over the
+> weekend of 31 Mar/1 Apr, with the final release to follow about a
+> fortnight after (assuming no major issues are found).
+> 
+> Hopefully, as many people as possible will be able to test the new
+> version of pip during the beta period (or before - it's possible to
+> install pip from github if you don't want to wait!) 
+Paul, am I right in thinking that this:
+
+   https://github.com/pypa/pip
+
+is the place to look if we want an advanced preview?
+
+TJG
+
+From p.f.moore at gmail.com  Fri Mar 16 05:26:57 2018
+From: p.f.moore at gmail.com (Paul Moore)
+Date: Fri, 16 Mar 2018 09:26:57 +0000
+Subject: [Distutils] Fwd: Re: Pip 10 is nearing release
+In-Reply-To: <b9c02336-a244-597a-f0e5-4ad2b40cc9ba@timgolden.me.uk>
+References: <70992e9d-e33a-2247-dc3d-7639dd25296e@timgolden.me.uk>
+ <b9c02336-a244-597a-f0e5-4ad2b40cc9ba@timgolden.me.uk>
+Message-ID: <CACac1F_bkxbbHpkcgBWHm9r=4i9Tx8mkz6e9644Dh0CP_8if1g@mail.gmail.com>
+
+On 16 March 2018 at 09:20, Tim Golden <mail at timgolden.me.uk> wrote:
+> On 16/03/2018 09:08, Paul Moore wrote:
+>>
+>> After much work, we're pleased to announce that pip 10 is finally
+>> nearing release. We're planning on releasing a beta version over the
+>> weekend of 31 Mar/1 Apr, with the final release to follow about a
+>> fortnight after (assuming no major issues are found).
+>>
+>> Hopefully, as many people as possible will be able to test the new
+>> version of pip during the beta period (or before - it's possible to
+>> install pip from github if you don't want to wait!)
+>
+> Paul, am I right in thinking that this:
+>
+>   https://github.com/pypa/pip
+>
+> is the place to look if we want an advanced preview?
+
+That's correct.
+
+If you want to upgrade (in a virtualenv, of course ;-)) then you can do
+
+    python -m pip install -U git+https://github.com/pypa/pip
+
+to get the latest copy from master. (Once the beta is released "python
+-m pip install -U --pre pip" will install the beta).
+
+Paul
+
+From sh at changeset.nyc  Sun Mar 18 08:59:38 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Sun, 18 Mar 2018 08:59:38 -0400
+Subject: [Distutils] prepping PEP 566 support in Twine for tomorrow
+Message-ID: <e8fd241f-7f27-31e5-9765-b45d6ef8f340@changeset.nyc>
+
+Per
+https://dustingram.com/articles/2018/03/16/markdown-descriptions-on-pypi
+, currently, Markdown support for a package long_description depends on
+a pre-release of Twine. I released Twine 1.11.0rc1 a few days ago. Today
+I'm fixing more bugs and putting out another release candidate, and then
+tomorrow I plan to release 1.11.0. Code review and testing is welcome,
+as is camaraderie in #pypa-dev on Freenode.
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+
+From tgraham at minsep.com.au  Fri Mar 16 11:12:04 2018
+From: tgraham at minsep.com.au (Tim Graham)
+Date: Fri, 16 Mar 2018 15:12:04 +0000
+Subject: [Distutils] Cannot install pyopencl
+Message-ID: <SYAPR01MB2815E4E278686A49F49E3560E7D70@SYAPR01MB2815.ausprd01.prod.outlook.com>
+
+Hello
+
+I wonder if you can help.... I am trying to install btcrecover which is no simple task. When I try and install pyopencl it keeps saying that it does not recognise it as a file name...
+
+Do you have any ideas?
+
+Thanks for your help.
+
+Best regards
+
+Tim Graham
+T: +61 8 9467 7664
+M: +61 457 414 935
+W: www.conveyorcn.com
+E: tgraham at minsep.com.au<mailto:tgraham at minsep.com.au>
+
+[cid:image003.jpg at 01D3BD7C.2F1A3F40]
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180316/4861888b/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: image003.jpg
+Type: image/jpeg
+Size: 5854 bytes
+Desc: image003.jpg
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180316/4861888b/attachment.jpg>
+
+From alex.gronholm at nextday.fi  Sun Mar 18 16:50:13 2018
+From: alex.gronholm at nextday.fi (=?UTF-8?Q?Alex_Gr=c3=b6nholm?=)
+Date: Sun, 18 Mar 2018 22:50:13 +0200
+Subject: [Distutils] Cannot install pyopencl
+In-Reply-To: <SYAPR01MB2815E4E278686A49F49E3560E7D70@SYAPR01MB2815.ausprd01.prod.outlook.com>
+References: <SYAPR01MB2815E4E278686A49F49E3560E7D70@SYAPR01MB2815.ausprd01.prod.outlook.com>
+Message-ID: <2ea6ed66-f157-6d87-0aec-019387371c5c@nextday.fi>
+
+This mailing list is for packaging development discussion. Questions on 
+how to install packages should be directed to either #pypa or #python on 
+Freenode IRC, or sites like StackOverflow.
+
+
+Tim Graham kirjoitti 16.03.2018 klo 17:12:
+>
+> Hello
+>
+> I wonder if you can help?. I am trying to install btcrecover which is 
+> no simple task. When I try and install pyopencl it keeps saying that 
+> it does not recognise it as a file name?
+>
+> Do you have any ideas?
+>
+> Thanks for your help.
+>
+> Best regards
+>
+> *Tim Graham *
+>
+> T: +61 8 9467 7664
+>
+> M: +61 457 414 935
+>
+> W: www.conveyorcn.com
+>
+> E: tgraham at minsep.com.au <mailto:tgraham at minsep.com.au>
+>
+>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180318/07819446/attachment-0001.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: image003.jpg
+Type: image/jpeg
+Size: 5854 bytes
+Desc: not available
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180318/07819446/attachment-0001.jpg>
+
+From ncoghlan at gmail.com  Mon Mar 19 07:34:04 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Mon, 19 Mar 2018 21:34:04 +1000
+Subject: [Distutils] Cannot install pyopencl
+In-Reply-To: <2ea6ed66-f157-6d87-0aec-019387371c5c@nextday.fi>
+References: <SYAPR01MB2815E4E278686A49F49E3560E7D70@SYAPR01MB2815.ausprd01.prod.outlook.com>
+ <2ea6ed66-f157-6d87-0aec-019387371c5c@nextday.fi>
+Message-ID: <CADiSq7fyBkcsoBh_LqNr=siUUT9-DzoK_8mWrDDmmD2DB4=7=g@mail.gmail.com>
+
+On 19 March 2018 at 06:50, Alex Gr?nholm <alex.gronholm at nextday.fi> wrote:
+
+> This mailing list is for packaging development discussion. Questions on
+> how to install packages should be directed to either #pypa or #python on
+> Freenode IRC, or sites like StackOverflow.
+>
+For problems installing particular projects, I'd also suggest investigating
+the assistance options for *that project*. In many cases, installation
+challenges are project specific, and it sounds like that may be the case
+here.
+
+Cheers,
+Nick.
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180319/0fb8ae1b/attachment.html>
+
+From thomas at kluyver.me.uk  Mon Mar 19 08:37:34 2018
+From: thomas at kluyver.me.uk (Thomas Kluyver)
+Date: Mon, 19 Mar 2018 12:37:34 +0000
+Subject: [Distutils] PyPI support for linux_ppc64le
+In-Reply-To: <CADiSq7d3tkWYVRCyXs17jTpq2DhQnweBuoJ5uWA2zSwrcA_yBg@mail.gmail.com>
+References: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+ <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+ <31ab6c26-d1dd-581d-5444-b1b8d5b41734@nextday.fi>
+ <1520865771.3865944.1300124352.1404035B@webmail.messagingengine.com>
+ <CADiSq7d3tkWYVRCyXs17jTpq2DhQnweBuoJ5uWA2zSwrcA_yBg@mail.gmail.com>
+Message-ID: <1521463054.1001075.1308121088.0ABAA27A@webmail.messagingengine.com>
+
+On Wed, Mar 14, 2018, at 2:12 PM, Nick Coghlan wrote:
+> Mark was OK with changing PEP 571 over to manylinux2010, but there are
+> also some fixes needed for the current Platform Detection section,
+> which isn't spelling out the version of glibc used as the baseline
+> marker:
+> https://mail.python.org/pipermail/distutils-sig/2018-February/031971.html> Cheers,
+> Nick.
+> P.S. If folks would like to nudge that process along a bit, I suspect
+>      Mark may find it easier to find time to review a PR making those
+>      changes than he would to draft the changes himself. I don't
+>      actually know that for sure though - I'm just generalising from
+>      an approach that often works on me :)
+I've made a PR to change the naming to manylinux2010, and add a
+paragraph about the change:https://github.com/python/peps/pull/596
+
+If we're happy with that, I can also look at changing the glibc version
+thing, but that will probably involve a bit more actual thought. ;-)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180319/448bd15c/attachment.html>
+
+From robin at reportlab.com  Mon Mar 19 11:34:46 2018
+From: robin at reportlab.com (Robin Becker)
+Date: Mon, 19 Mar 2018 15:34:46 +0000
+Subject: [Distutils] timeline for 3.7 distribution testing
+Message-ID: <3d230d6f-4a82-bb63-5917-3a87fb68f940@chamonix.reportlab.co.uk>
+
+Anyone here know approximately when the manylinux docker or appveyor ci will be upgraded to supprt Python 3.7?
+-- 
+Robin Becker
+
+From trishank.kuppusamy at datadoghq.com  Mon Mar 19 11:40:27 2018
+From: trishank.kuppusamy at datadoghq.com (Trishank Kuppusamy)
+Date: Mon, 19 Mar 2018 11:40:27 -0400
+Subject: [Distutils] timeline for 3.7 distribution testing
+In-Reply-To: <3d230d6f-4a82-bb63-5917-3a87fb68f940@chamonix.reportlab.co.uk>
+References: <3d230d6f-4a82-bb63-5917-3a87fb68f940@chamonix.reportlab.co.uk>
+Message-ID: <CAEd-exPSWJRby4WeWddPSAU5TnXq7k7s==gga7U3G_T4yDZT8A@mail.gmail.com>
+
+On Mon, Mar 19, 2018 at 11:34 AM, Robin Becker <robin at reportlab.com> wrote:
+
+> Anyone here know approximately when the manylinux docker or appveyor ci
+> will be upgraded to supprt Python 3.7?
+
+
+It's really easy to send a PR to update CPython to the manylinux repo:
+
+https://github.com/pypa/manylinux/pull/138
+
+They are very friendly and receptive, by the way!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180319/71f6bc1d/attachment.html>
+
+From pradyunsg at gmail.com  Mon Mar 19 13:30:00 2018
+From: pradyunsg at gmail.com (Pradyun Gedam)
+Date: Mon, 19 Mar 2018 17:30:00 +0000
+Subject: [Distutils] Renaming this list to python-packaging
+Message-ID: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+
+Hey all!
+
+Given the direction we're moving with PEP 517/518, I propose that we rename
+this list to something like python-packaging or something similar, to make
+it a more relavantly named place for having discussions related to Python
+Packaging in general.
+
+I'm curious what others think about this. I'm definitely open to thoughts
+and other ideas. :)
+
+Cheers,
+Pradyun
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180319/3149101d/attachment.html>
+
+From p.f.moore at gmail.com  Mon Mar 19 13:39:42 2018
+From: p.f.moore at gmail.com (Paul Moore)
+Date: Mon, 19 Mar 2018 17:39:42 +0000
+Subject: [Distutils] Renaming this list to python-packaging
+In-Reply-To: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+References: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+Message-ID: <CACac1F-TBoQpPhcCaw5=gtPogLDvMv17eieabWY1sXHy+sij4A@mail.gmail.com>
+
+On 19 March 2018 at 17:30, Pradyun Gedam <pradyunsg at gmail.com> wrote:
+> Hey all!
+>
+> Given the direction we're moving with PEP 517/518, I propose that we rename
+> this list to something like python-packaging or something similar, to make
+> it a more relavantly named place for having discussions related to Python
+> Packaging in general.
+>
+> I'm curious what others think about this. I'm definitely open to thoughts
+> and other ideas. :)
+
+Maybe packaging-sig, to fit in with the other SIGs? See
+https://www.python.org/community/sigs/
+
+Paul
+
+From pradyunsg at gmail.com  Mon Mar 19 13:45:46 2018
+From: pradyunsg at gmail.com (Pradyun Gedam)
+Date: Mon, 19 Mar 2018 17:45:46 +0000
+Subject: [Distutils] Renaming this list to python-packaging
+In-Reply-To: <CACac1F-TBoQpPhcCaw5=gtPogLDvMv17eieabWY1sXHy+sij4A@mail.gmail.com>
+References: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+ <CACac1F-TBoQpPhcCaw5=gtPogLDvMv17eieabWY1sXHy+sij4A@mail.gmail.com>
+Message-ID: <CAPA-Equmk8MahTWbB1HPzX86PPLomBasADj9yWrF2an9zu2ffg@mail.gmail.com>
+
+On Mon, 19 Mar 2018 at 23:09 Paul Moore <p.f.moore at gmail.com> wrote:
+
+> On 19 March 2018 at 17:30, Pradyun Gedam <pradyunsg at gmail.com> wrote:
+> > Hey all!
+> >
+> > Given the direction we're moving with PEP 517/518, I propose that we
+> rename
+> > this list to something like python-packaging or something similar, to
+> make
+> > it a more relavantly named place for having discussions related to Python
+> > Packaging in general.
+> >
+> > I'm curious what others think about this. I'm definitely open to thoughts
+> > and other ideas. :)
+
+
+> Maybe packaging-sig, to fit in with the other SIGs? See
+> https://www.python.org/community/sigs/
+>
+> Paul
+>
+
+Yes. That sounds like a good idea!
+
+Pradyun
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180319/e4721438/attachment.html>
+
+From donald at stufft.io  Mon Mar 19 13:46:15 2018
+From: donald at stufft.io (Donald Stufft)
+Date: Mon, 19 Mar 2018 13:46:15 -0400
+Subject: [Distutils] Renaming this list to python-packaging
+In-Reply-To: <CACac1F-TBoQpPhcCaw5=gtPogLDvMv17eieabWY1sXHy+sij4A@mail.gmail.com>
+References: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+ <CACac1F-TBoQpPhcCaw5=gtPogLDvMv17eieabWY1sXHy+sij4A@mail.gmail.com>
+Message-ID: <EDD1E8B4-E0CF-4E53-B6CF-C3923268E0B6@stufft.io>
+
+I don?t think we can rename a mailing list easily, we can create a new one and archive the old one but that has a lot of churn and breaks people?s filters, etc.
+
+> On Mar 19, 2018, at 1:39 PM, Paul Moore <p.f.moore at gmail.com> wrote:
+> 
+> On 19 March 2018 at 17:30, Pradyun Gedam <pradyunsg at gmail.com> wrote:
+>> Hey all!
+>> 
+>> Given the direction we're moving with PEP 517/518, I propose that we rename
+>> this list to something like python-packaging or something similar, to make
+>> it a more relavantly named place for having discussions related to Python
+>> Packaging in general.
+>> 
+>> I'm curious what others think about this. I'm definitely open to thoughts
+>> and other ideas. :)
+> 
+> Maybe packaging-sig, to fit in with the other SIGs? See
+> https://www.python.org/community/sigs/
+> 
+> Paul
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+
+
+From tritium-list at sdamon.com  Mon Mar 19 17:03:09 2018
+From: tritium-list at sdamon.com (Alex Walters)
+Date: Mon, 19 Mar 2018 17:03:09 -0400
+Subject: [Distutils] Renaming this list to python-packaging
+In-Reply-To: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+References: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+Message-ID: <3d14b01d3bfc5$b05f8970$111e9c50$@sdamon.com>
+
+There is a technical limitation that we would not be renaming the list as much as closing this one, and opening a new one.  That creates any number of social problems, for little to no benefit ? the name is slightly more relevant at the cost of breaking everyone?s subscriptions, and the mail filters of anyone who filters.  There are any number of glitches and headaches for what end?
+
+ 
+
+It sounds nice but, it causes more real pain than the theoretical pain the current name causes.
+
+ 
+
+From: Distutils-SIG <distutils-sig-bounces+tritium-list=sdamon.com at python.org> On Behalf Of Pradyun Gedam
+Sent: Monday, March 19, 2018 1:30 PM
+To: DistUtils Mailing List"" <distutils-sig at python.org>
+Subject: [Distutils] Renaming this list to python-packaging
+
+ 
+
+Hey all!
+
+ 
+
+Given the direction we're moving with PEP 517/518, I propose that we rename this list to something like python-packaging or something similar, to make it a more relavantly named place for having discussions related to Python Packaging in general.
+
+ 
+
+I'm curious what others think about this. I'm definitely open to thoughts and other ideas. :)
+
+ 
+
+Cheers,
+
+Pradyun
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180319/c4dc835f/attachment-0001.html>
+
+From p.f.moore at gmail.com  Mon Mar 19 17:08:00 2018
+From: p.f.moore at gmail.com (Paul Moore)
+Date: Mon, 19 Mar 2018 21:08:00 +0000
+Subject: [Distutils] Renaming this list to python-packaging
+In-Reply-To: <3d14b01d3bfc5$b05f8970$111e9c50$@sdamon.com>
+References: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+ <3d14b01d3bfc5$b05f8970$111e9c50$@sdamon.com>
+Message-ID: <CACac1F_v4o+0CuTkZndAKk4YOszDwPdaLBwyguLmcpos-YLV9w@mail.gmail.com>
+
+Good point. I agree that not disrupting list users is more important
+than the list name.
+
+Paul
+
+On 19 March 2018 at 21:03, Alex Walters <tritium-list at sdamon.com> wrote:
+> There is a technical limitation that we would not be renaming the list as
+> much as closing this one, and opening a new one.  That creates any number of
+> social problems, for little to no benefit ? the name is slightly more
+> relevant at the cost of breaking everyone?s subscriptions, and the mail
+> filters of anyone who filters.  There are any number of glitches and
+> headaches for what end?
+>
+>
+>
+> It sounds nice but, it causes more real pain than the theoretical pain the
+> current name causes.
+>
+>
+>
+> From: Distutils-SIG
+> <distutils-sig-bounces+tritium-list=sdamon.com at python.org> On Behalf Of
+> Pradyun Gedam
+> Sent: Monday, March 19, 2018 1:30 PM
+> To: DistUtils Mailing List"" <distutils-sig at python.org>
+> Subject: [Distutils] Renaming this list to python-packaging
+>
+>
+>
+> Hey all!
+>
+>
+>
+> Given the direction we're moving with PEP 517/518, I propose that we rename
+> this list to something like python-packaging or something similar, to make
+> it a more relavantly named place for having discussions related to Python
+> Packaging in general.
+>
+>
+>
+> I'm curious what others think about this. I'm definitely open to thoughts
+> and other ideas. :)
+>
+>
+>
+> Cheers,
+>
+> Pradyun
+>
+>
+>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+
+From sh at changeset.nyc  Mon Mar 19 20:13:20 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Mon, 19 Mar 2018 20:13:20 -0400
+Subject: [Distutils] Twine 1.11.0 released
+In-Reply-To: <e8fd241f-7f27-31e5-9765-b45d6ef8f340@changeset.nyc>
+References: <e8fd241f-7f27-31e5-9765-b45d6ef8f340@changeset.nyc>
+Message-ID: <c01676cf-b832-1a36-1b5c-63f3e60cc820@changeset.nyc>
+
+https://pypi.org/project/twine/1.11.0/ Twine 1.11.0 is now out
+(changelog at https://twine.readthedocs.io/en/latest/changelog.html ).
+
+Thanks in particular to Dustin Ingram, Jon Wayne Parrott, Donald Stufft,
+Ian Stapleton Cordasco, Leonard Richardson, Matthew Planchard, Holger
+Krekel, Jason R. Coombs, Maurits van Rees, and Florian Schulze for code,
+testing, review, documentation, and advice.
+
+On 03/18/2018 08:59 AM, Sumana Harihareswara wrote:
+subject: prepping PEP 566 support in Twine for tomorrow
+> Per
+> https://dustingram.com/articles/2018/03/16/markdown-descriptions-on-pypi
+> , currently, Markdown support for a package long_description depends on
+> a pre-release of Twine. I released Twine 1.11.0rc1 a few days ago. Today
+> I'm fixing more bugs and putting out another release candidate, and then
+> tomorrow I plan to release 1.11.0. Code review and testing is welcome,
+> as is camaraderie in #pypa-dev on Freenode.
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From ncoghlan at gmail.com  Tue Mar 20 07:03:19 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Tue, 20 Mar 2018 21:03:19 +1000
+Subject: [Distutils] Renaming this list to python-packaging
+In-Reply-To: <CACac1F_v4o+0CuTkZndAKk4YOszDwPdaLBwyguLmcpos-YLV9w@mail.gmail.com>
+References: <CAPA-EqsnE65-LpMnamyZ-4=Lg02mUWMQaVMD+fJEkY6C-Fm6sg@mail.gmail.com>
+ <3d14b01d3bfc5$b05f8970$111e9c50$@sdamon.com>
+ <CACac1F_v4o+0CuTkZndAKk4YOszDwPdaLBwyguLmcpos-YLV9w@mail.gmail.com>
+Message-ID: <CADiSq7exjD9PzHYpNpkcfBHfYXdQTYd7C3AqRBNAY6hCppOVow@mail.gmail.com>
+
+On 20 March 2018 at 07:08, Paul Moore <p.f.moore at gmail.com> wrote:
+
+> Good point. I agree that not disrupting list users is more important
+> than the list name.
+>
+
+Yeah, this is the main reason we haven't changed the name already. I
+wondered if Mailman 3 might offer native support for list renames, but
+https://gitlab.com/mailman/mailman/issues/156 suggests that while the devs
+are open to the idea, it isn't supported yet.
+
+Cheers,
+Nick.
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180320/d85a5bc5/attachment.html>
+
+From sh at changeset.nyc  Tue Mar 20 22:12:48 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Tue, 20 Mar 2018 22:12:48 -0400
+Subject: [Distutils] PyPI/Warehouse: infrastructure hardening & the CAPTCHA
+ conundrum
+Message-ID: <1521598368.2893264.1310393928.5C49AB09@webmail.messagingengine.com>
+
+So we aren't quite at beta yet, but we'll be shouting about pypi.org
+*really soon*. We have nearly all the Warehouse improvements we need for
+beta, and nearly all the infrastructure improvements we believe we'll
+need for the switchover.
+
+I'll tell you how you can help, then talk about the current state
+of things.
+ * The big blocker keeping us from beta: China & CAPTCHAs. Help
+   advise us.[1]
+ * Comment on a "needs discussion" issue[2].
+ * Help us with large-scope JavaScript issues[3], like our frontend
+   testing approach.
+ * Please talk with Nicole about being a subject or interviewer for
+   user tests[4].
+ * Tell me if you're planning to join us at sprints at PyCon or
+   EuroPython[5].
+ * Check out our open good first Warehouse issues[6] (we usually have
+   10+ open) and get started[7].
+
+If you follow https://status.python.org/  you saw we did some load
+testing last week and learned from it! We redirected some traffic, for a
+few periods, for `pip install`, from the old server to Warehouse, and
+learned from it. For instance, people running Ubuntu 14.04 LTS (long
+term service release)[8] are usually using a pretty old version of pip,
+and people on some versions of the Mac OS[9] have older versions of
+Python and old versions of security-related libraries that don't support
+the version of TLS that we want them to use. Ernest, Donald and Dustin
+did a bunch of work addressing this, including Donald putting out pip
+9.0.2[10].
+
+(A thing to understand about Ernest's continuing work on PyPI and
+distribution infrastructure is that it's in a lot of places. It's
+cabotage[11] & a test cabotage app[12], configuration with salt[13],
+conveyor[14], pip[15] & get-pip[16], and he filed a bug in
+Kubernetes[17] which I personally find particularly impressive. And it's
+in user-facing communication in IRC and GitHub comments and on our
+statuspage and Twitter, plus a lot of internal discussion with
+infrastructure colleagues. I have a harder time gathering links for
+Ernest's work for these emails than for my other teammates; regrets.)
+
+As usual, a summary of the past week's work is in our meeting notes[18].
+We have new features like letting PyPI administrators add new trove
+classifiers easily[19], infrastructure improvements like this complexity
+reduction[20],  ton of polish and bug fixing around layout, description
+content types (Markdown!), a FAQ restructuring[21], a more useful
+collaboration page[22], etc. And we reviewed and merged a lot of
+volunteers' pull requests!
+
+Thanks to our prolific volunteers:
+ *  pgadige making sure an error message reflects whether you're on PyPI
+    or Test PyPI[23] *  waseem18 providing an error message for the password reset[24]
+ *  cryvate fixing form requirements for password reset[25]
+ *  waseem18 fixing disabled button CSS[26]
+ *  yeraydiazdiaz fixing modal window behavior[27], then refixing[28]
+ *  berkerpeksag adding a "public profile" link to the user dropdown[29] *  Mariatta sending notification email when a project
+    collaborator's added[30] *  berkerpeksag hiding the "view project" button for no-release-yet
+    projects in maintainers' project lists[31] *  alexwlchan renaming a CSS class for consistency[32]
+ *  jMuzsik improving documentation of owners' and maintainers'
+    privileges[33] *  yeraydiazdiaz adding JavaScript validation to show the user if "new
+    password" and "confirm new password" don't match[34] *  alexwlchan documenting all the modifiers in our SASS directory[35]
+ *  alanbato and yeraydiazdiaz adding a check to stop someone
+    from uploading a file whose blake2 hash matches an already-
+    uploaded file[36] *  cryvate improving sorting of package versions in our /simple/
+    API[37] *  jMuzsik improving how PyPI links look on Twitter, adding an image to
+    our Twitter cards[38]
+ * 9999years updating the Python Packaging User Guide[39] and sample
+   project[40] for Markdown/PEP 566
+And thanks to our many bug reporters, especially those who helped us
+learn from our load tests.
+Also, check out discussion on API key support/macaroons[41],  supporting
+GitHub-flavored Markdown as Description-Content-Type[42],  and project
+rating/ranking/stars[43].
+And finally, we are ever closer to accepting PEP 541 (and planning
+followup tasks[44])  and are testing our PEP 566 compliance[45]. And I
+may start a PEP for a Python package index upload API specification[46].
+More next week, as usual.
+
+*Thanks to Mozilla for their support[47] for the PyPI & Warehouse
+work[48]!*
+--
+Sumana Harihareswara
+Warehouse project manager
+Changeset Consulting
+sh at changeset.nyc
+
+Links:
+
+   1. https://github.com/pypa/warehouse/issues/3174
+   2. https://github.com/pypa/warehouse/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22needs+discussion%22
+   3. https://github.com/pypa/warehouse/issues/1297
+   4. http://whoisnicoleharris.com/2018/03/13/user-testing-warehouse.html
+   5. https://wiki.python.org/psf/PackagingSprints
+   6. https://github.com/pypa/warehouse/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+   7. https://warehouse.readthedocs.io/development/getting-started/
+   8. https://github.com/pypa/warehouse/issues/3280
+   9. https://github.com/pypa/warehouse/issues/3293
+  10. https://pypi.org/project/pip/9.0.2/
+  11. https://github.com/cabotage/cabotage-app
+  12. https://github.com/cabotage/test-app/commits?author=ewdurbin&since=2018-03-01T05:00:00Z&until=2018-03-21T04:00:00Z
+  13. https://github.com/python/pypi-salt/commit/1a20cd53ffce0fd3d018d989199d30e11d35ad83
+  14. https://github.com/pypa/conveyor/commits?author=ewdurbin&since=2018-03-13T05:00:00Z&until=2018-03-21T04:00:00Z
+  15. https://github.com/pypa/pip/pull/5076
+  16. https://github.com/pypa/get-pip/commits?author=ewdurbin&since=2018-03-01T05:00:00Z&until=2018-03-21T04:00:00Z
+  17. https://github.com/kubernetes/kubectl/issues/335
+  18. https://wiki.python.org/psf/PackagingWG/2018-03-19-Warehouse
+  19. https://github.com/pypa/warehouse/issues/2649
+  20. https://github.com/pypa/warehouse/pull/3289
+  21. https://github.com/pypa/warehouse/pull/3190
+  22. https://github.com/pypa/warehouse/pull/3047
+  23. https://github.com/pypa/warehouse/pull/3314
+  24. https://github.com/pypa/warehouse/pull/3220
+  25. https://github.com/pypa/warehouse/pull/3230
+  26. https://github.com/pypa/warehouse/pull/3254
+  27. https://github.com/pypa/warehouse/pull/3251
+  28. https://github.com/pypa/warehouse/pull/3291
+  29. https://github.com/pypa/warehouse/pull/3255
+  30. https://github.com/pypa/warehouse/pull/3155
+  31. https://github.com/pypa/warehouse/pull/3257
+  32. https://github.com/pypa/warehouse/pull/3261
+  33. https://github.com/pypa/warehouse/pull/3313
+  34. https://github.com/pypa/warehouse/pull/3219
+  35. https://github.com/pypa/warehouse/pull/3262
+  36. https://github.com/pypa/warehouse/pull/3310
+  37. https://github.com/pypa/warehouse/pull/2574
+  38. https://github.com/pypa/warehouse/pull/3304
+  39. https://github.com/pypa/python-packaging-user-guide/pull/457
+  40. https://github.com/pypa/sampleproject/pull/66
+  41. https://github.com/pypa/warehouse/issues/994
+  42. https://github.com/pypa/packaging-problems/issues/126
+  43. https://github.com/pypa/warehouse/issues/991#issuecomment-374665356
+  44. https://github.com/pypa/warehouse/issues/1506#issuecomment-374626455
+  45. https://github.com/pypa/warehouse/issues/3299
+  46. https://github.com/pypa/packaging-problems/issues/128
+  47. https://blog.mozilla.org/blog/2018/01/23/moss-q4-supporting-python-ecosystem/
+  48. https://pyfound.blogspot.com/2017/11/the-psf-awarded-moss-grant-pypi.html
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180320/0f75f4d9/attachment.html>
+
+From alex.gronholm at nextday.fi  Wed Mar 21 15:03:29 2018
+From: alex.gronholm at nextday.fi (alex.gronholm at nextday.fi)
+Date: Wed, 21 Mar 2018 21:03:29 +0200
+Subject: [Distutils] Removing wheel signing features from the wheel library
+Message-ID: <1521659009.14379.6.camel@nextday.fi>
+
+After spending quite some time thinking about this, I've decided to cut
+out the wheel signature related features from the wheel codebase,
+unless there is significant resistance among the readers of this
+mailing list. For those not involved in the previous discussion, the
+reasoning is that the codebase can be significantly simplified by
+removing this rarely used feature whose practical value is questionable
+at best, given the lack of infrastructure for public key distribution.
+
+If, as a result, there is a public outcry (which I sincerely doubt), I
+can always add it back to the next release.
+
+From sh at changeset.nyc  Wed Mar 21 22:58:14 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Wed, 21 Mar 2018 22:58:14 -0400
+Subject: [Distutils] TLS support policy & PyPI communications
+Message-ID: <959b5694-1a42-452c-a181-16904cfdd4c3@changeset.nyc>
+
+PSF blogged last year
+https://pyfound.blogspot.com/2017/01/time-to-upgrade-your-python-tls-v12.html
+that
+
+> The more crucial deadline comes June 30, 2018. On that date all remaining python.org sites, including PyPI, will no longer support TSL 1.0 and 1.1. Older Python versions that do not implement TLSv1.2 will be prohibited from accessing PyPI.
+
+I asked Ernest W. Durbin III whether I ought to re-announce this to
+users in my PyPI announcements. He looked at our TLS trends/stats and
+told me we have a very very low proportion of traffic that will be
+affected when we shift over. Therefore, since it'll affect so few, I
+won't shout about TLS versions in my PyPI communications. Marking that
+here for the record.
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From donald at stufft.io  Thu Mar 22 03:25:00 2018
+From: donald at stufft.io (Donald Stufft)
+Date: Thu, 22 Mar 2018 03:25:00 -0400
+Subject: [Distutils] TLS support policy & PyPI communications
+In-Reply-To: <959b5694-1a42-452c-a181-16904cfdd4c3@changeset.nyc>
+References: <959b5694-1a42-452c-a181-16904cfdd4c3@changeset.nyc>
+Message-ID: <EACD4A5A-E2E2-4A69-A602-07ECBFD351C2@stufft.io>
+
+Just as an FYI, as of this morning we?ve started doing brownouts of the deprecated TLS versions. For the first 10 minutes of each hour anyone attempting to access PyPI with TLSv1.0 or TLSv1.1 will get a 403 response with an informative error. 
+
+As we get closer to the deadline I will be ramping up the amount of time the endpoint is down for the deprecated TLS versions. The ultimate goal being to have it be 100% unavailable prior to the final deadline (because we can give a good error messsge, once the dead line hits it will just be a crappy OpenSSL error). 
+
+Sent from my iPhone
+
+> On Mar 21, 2018, at 10:58 PM, Sumana Harihareswara <sh at changeset.nyc> wrote:
+> 
+> PSF blogged last year
+> https://pyfound.blogspot.com/2017/01/time-to-upgrade-your-python-tls-v12.html
+> that
+> 
+>> The more crucial deadline comes June 30, 2018. On that date all remaining python.org sites, including PyPI, will no longer support TSL 1.0 and 1.1. Older Python versions that do not implement TLSv1.2 will be prohibited from accessing PyPI.
+> 
+> I asked Ernest W. Durbin III whether I ought to re-announce this to
+> users in my PyPI announcements. He looked at our TLS trends/stats and
+> told me we have a very very low proportion of traffic that will be
+> affected when we shift over. Therefore, since it'll affect so few, I
+> won't shout about TLS versions in my PyPI communications. Marking that
+> here for the record.
+
+
+From ncoghlan at gmail.com  Thu Mar 22 07:44:05 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Thu, 22 Mar 2018 21:44:05 +1000
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <1521659009.14379.6.camel@nextday.fi>
+References: <1521659009.14379.6.camel@nextday.fi>
+Message-ID: <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+
+On 22 March 2018 at 05:03, <alex.gronholm at nextday.fi> wrote:
+
+> After spending quite some time thinking about this, I've decided to cut
+> out the wheel signature related features from the wheel codebase,
+> unless there is significant resistance among the readers of this
+> mailing list. For those not involved in the previous discussion, the
+> reasoning is that the codebase can be significantly simplified by
+> removing this rarely used feature whose practical value is questionable
+> at best, given the lack of infrastructure for public key distribution.
+>
+
+Clarifying the scope here: is this about removing the hashes from the
+RECORD file, or just about dropping the native support for injecting the
+RECORD.jws and/or RECORD.p7s file? I ask as both of those features are
+covered in the same section of PEP 427:
+https://www.python.org/dev/peps/pep-0427/#signed-wheel-files
+
+If it's just the latter, then I don't see any problem with that at all -
+the generated wheels will still be completely compliant with PEP 427, it's
+just that anyone that does want to sign RECORD will need to extract from
+the archive, sign it, then add the signature file back in.
+
+Changing the format of RECORD would be a problem though, since it's a
+documented requirement that installers are expected to check those at
+installation time.
+
+Cheers,
+Nick.
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/dbe3538f/attachment.html>
+
+From alex.gronholm at nextday.fi  Thu Mar 22 08:35:08 2018
+From: alex.gronholm at nextday.fi (alex.gronholm at nextday.fi)
+Date: Thu, 22 Mar 2018 14:35:08 +0200
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+Message-ID: <1521722108.14379.11.camel@nextday.fi>
+
+to, 2018-03-22 kello 21:44 +1000, Nick Coghlan kirjoitti:
+> On 22 March 2018 at 05:03, <alex.gronholm at nextday.fi> wrote:
+> > After spending quite some time thinking about this, I've decided to
+> > cut
+> > out the wheel signature related features from the wheel codebase,
+> > unless there is significant resistance among the readers of this
+> > mailing list. For those not involved in the previous discussion,
+> > the
+> > reasoning is that the codebase can be significantly simplified by
+> > removing this rarely used feature whose practical value is
+> > questionable
+> > at best, given the lack of infrastructure for public key
+> > distribution.
+> 
+> Clarifying the scope here: is this about removing the hashes from the
+> RECORD file, or just about dropping the native support for injecting
+> the RECORD.jws and/or RECORD.p7s file? I ask as both of those
+> features are covered in the same section of PEP 427: https://www.pyth
+> on.org/dev/peps/pep-0427/#signed-wheel-files
+> 
+> If it's just the latter, then I don't see any problem with that at
+> all - the generated wheels will still be completely compliant with
+> PEP 427, it's just that anyone that does want to sign RECORD will
+> need to extract from the archive, sign it, then add the signature
+> file back in.
+> 
+> Changing the format of RECORD would be a problem though, since it's a
+> documented requirement that installers are expected to check those at
+> installation time.
+I am not changing the format of RECORD, I'm simply removing the
+cryptographic signing and verifying functionality, just the way you
+described. Hash checking will stay. As we agreed earlier, those
+features could be deprecated or removed from the PEP entirely.
+> 
+> Cheers,
+> Nick.
+> 
+
+From ncoghlan at gmail.com  Thu Mar 22 08:41:32 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Thu, 22 Mar 2018 22:41:32 +1000
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <1521722108.14379.11.camel@nextday.fi>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+Message-ID: <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+
+On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+
+> I am not changing the format of RECORD, I'm simply removing the
+> cryptographic signing and verifying functionality, just the way you
+> described. Hash checking will stay. As we agreed earlier, those
+> features could be deprecated or removed from the PEP entirely.
+>
+
+Cool, that's what I thought you meant, but I figured I should double check
+since our discussion was a while ago now :)
+
+Cheers,
+Nick.
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/56b385a2/attachment.html>
+
+From thomas at kluyver.me.uk  Thu Mar 22 09:47:13 2018
+From: thomas at kluyver.me.uk (Thomas Kluyver)
+Date: Thu, 22 Mar 2018 13:47:13 +0000
+Subject: [Distutils] PyPI support for linux_ppc64le
+In-Reply-To: <1521463054.1001075.1308121088.0ABAA27A@webmail.messagingengine.com>
+References: <CALzTN-T0fVbmA7CnhByVGqQHDvx2=9mgsB9Os8CpXaia+aZvcw@mail.gmail.com>
+ <CACac1F_Xv6avTBeSzspnie_z=h2EYfZqQpv1fiedGOPCCNgMRg@mail.gmail.com>
+ <31ab6c26-d1dd-581d-5444-b1b8d5b41734@nextday.fi>
+ <1520865771.3865944.1300124352.1404035B@webmail.messagingengine.com>
+ <CADiSq7d3tkWYVRCyXs17jTpq2DhQnweBuoJ5uWA2zSwrcA_yBg@mail.gmail.com>
+ <1521463054.1001075.1308121088.0ABAA27A@webmail.messagingengine.com>
+Message-ID: <1521726433.1536397.1312302784.48F2193D@webmail.messagingengine.com>
+
+On Mon, Mar 19, 2018, at 12:37 PM, Thomas Kluyver wrote:
+> If we're happy with that, I can also look at changing the glibc
+> version thing, but that will probably involve a bit more actual
+> thought. ;-)
+I've opened another PR for this:
+https://github.com/python/peps/pull/597
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/0b7ad43b/attachment.html>
+
+From wes.turner at gmail.com  Thu Mar 22 13:57:26 2018
+From: wes.turner at gmail.com (Wes Turner)
+Date: Thu, 22 Mar 2018 13:57:26 -0400
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+Message-ID: <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+
+What maintenance is required?
+
+Here's a link to the previous discussion of this issue:
+
+"Remove or deprecate wheel-signing features"
+https://github.com/pypa/wheel/issues/196
+
+What has changed? There is still no method for specifying a keyring;
+whereas with GPG, all keys in the ring are trusted.
+
+On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+
+> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>
+>> I am not changing the format of RECORD, I'm simply removing the
+>> cryptographic signing and verifying functionality, just the way you
+>> described. Hash checking will stay. As we agreed earlier, those
+>> features could be deprecated or removed from the PEP entirely.
+>>
+>
+> Cool, that's what I thought you meant, but I figured I should double check
+> since our discussion was a while ago now :)
+>
+> Cheers,
+> Nick.
+>
+> --
+> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/20a4913b/attachment.html>
+
+From alex.gronholm at nextday.fi  Thu Mar 22 14:16:40 2018
+From: alex.gronholm at nextday.fi (alex.gronholm at nextday.fi)
+Date: Thu, 22 Mar 2018 20:16:40 +0200
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+Message-ID: <1521742600.14379.18.camel@nextday.fi>
+
+to, 2018-03-22 kello 13:57 -0400, Wes Turner kirjoitti:
+> What maintenance is required?
+
+It's hard to say for sure, since that depends on what requirements come
+up in the future. One thing this certainly affects is the test suite
+which I plan to rewrite because I feel it is woefully inadequate.
+Removing mostly unused features helps reduce the effort required for
+that. Ditto for the general code refactoring which I'm also planning on
+doing.
+> Here's a link to the previous discussion of this issue:
+> 
+> "Remove or deprecate wheel-signing features"
+> https://github.com/pypa/wheel/issues/196
+> 
+> What has changed? There is still no method for specifying a keyring;
+> whereas with GPG, all keys in the ring are trusted.
+> 
+> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+> > On 22 March 2018 at 22:35,  <alex.gronholm at nextday.fi> wrote: 
+> > > I am not changing the format of RECORD, I'm simply removing the
+> > > 
+> > > cryptographic signing and verifying functionality, just the way
+> > > you
+> > > 
+> > > described. Hash checking will stay. As we agreed earlier, those
+> > > 
+> > > features could be deprecated or removed from the PEP entirely.
+> > 
+> > Cool, that's what I thought you meant, but I figured I should
+> > double check since our discussion was a while ago now :)
+> > 
+> > Cheers,
+> > Nick.
+> > 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/2962a518/attachment.html>
+
+From njs at pobox.com  Thu Mar 22 14:21:12 2018
+From: njs at pobox.com (Nathaniel Smith)
+Date: Thu, 22 Mar 2018 11:21:12 -0700
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+Message-ID: <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+
+Even if no maintenance were required, it's still a feature that promises to
+provide security but doesn't. This kind of feature has negative value.
+
+I'd also suggest adding a small note to the PEP documenting that the
+signing feature didn't work out, and maybe linking to Donald's package
+signing blog post. I know updating PEPs isn't the most common thing, but
+it's the main documentation of the wheel format and it'll save confusion
+later.
+
+On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com> wrote:
+
+> What maintenance is required?
+>
+> Here's a link to the previous discussion of this issue:
+>
+> "Remove or deprecate wheel-signing features"
+> https://github.com/pypa/wheel/issues/196
+>
+> What has changed? There is still no method for specifying a keyring;
+> whereas with GPG, all keys in the ring are trusted.
+>
+> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>
+>> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>>
+>>> I am not changing the format of RECORD, I'm simply removing the
+>>> cryptographic signing and verifying functionality, just the way you
+>>> described. Hash checking will stay. As we agreed earlier, those
+>>> features could be deprecated or removed from the PEP entirely.
+>>>
+>>
+>> Cool, that's what I thought you meant, but I figured I should double
+>> check since our discussion was a while ago now :)
+>>
+>> Cheers,
+>> Nick.
+>>
+>> --
+>> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/55681dbd/attachment.html>
+
+From dholth at gmail.com  Thu Mar 22 16:00:39 2018
+From: dholth at gmail.com (Daniel Holth)
+Date: Thu, 22 Mar 2018 20:00:39 +0000
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+Message-ID: <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+
+The feature was a building block that was intended to be used in much the
+same way that SHA package hashes are used, providing similar security to
+the ssh-style TOFU model, but less security than other imaginable public
+key systems. The idea was that it could provide more security in practice
+because the signatures could exist and be present with the archive, unlike
+gpg which provides loads of security in theory only. Unfortunately wheel
+signatures were never built up. I don't think anyone was tricked into
+believing the primitive provided security on its own.
+
+On Thu, Mar 22, 2018 at 2:21 PM Nathaniel Smith <njs at pobox.com> wrote:
+
+> Even if no maintenance were required, it's still a feature that promises
+> to provide security but doesn't. This kind of feature has negative value.
+>
+> I'd also suggest adding a small note to the PEP documenting that the
+> signing feature didn't work out, and maybe linking to Donald's package
+> signing blog post. I know updating PEPs isn't the most common thing, but
+> it's the main documentation of the wheel format and it'll save confusion
+> later.
+>
+> On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com> wrote:
+>
+>> What maintenance is required?
+>>
+>> Here's a link to the previous discussion of this issue:
+>>
+>> "Remove or deprecate wheel-signing features"
+>> https://github.com/pypa/wheel/issues/196
+>>
+>> What has changed? There is still no method for specifying a keyring;
+>> whereas with GPG, all keys in the ring are trusted.
+>>
+>> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>>
+>>> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>>>
+>>>> I am not changing the format of RECORD, I'm simply removing the
+>>>> cryptographic signing and verifying functionality, just the way you
+>>>> described. Hash checking will stay. As we agreed earlier, those
+>>>> features could be deprecated or removed from the PEP entirely.
+>>>>
+>>>
+>>> Cool, that's what I thought you meant, but I figured I should double
+>>> check since our discussion was a while ago now :)
+>>>
+>>> Cheers,
+>>> Nick.
+>>>
+>>> --
+>>> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>>>
+>>
+>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>
+>> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/c65c4c37/attachment-0001.html>
+
+From wes.turner at gmail.com  Thu Mar 22 16:40:06 2018
+From: wes.turner at gmail.com (Wes Turner)
+Date: Thu, 22 Mar 2018 16:40:06 -0400
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+Message-ID: <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+
+On Thursday, March 22, 2018, Daniel Holth <dholth at gmail.com> wrote:
+
+> The feature was a building block that was intended to be used in much the
+> same way that SHA package hashes are used, providing similar security to
+> the ssh-style TOFU model, but less security than other imaginable public
+> key systems. The idea was that it could provide more security in practice
+> because the signatures could exist and be present with the archive, unlike
+> gpg which provides loads of security in theory only. Unfortunately wheel
+> signatures were never built up. I don't think anyone was tricked into
+> believing the primitive provided security on its own.
+>
+
+The hashes serve as file integrity check but provide no assurance that they
+are what the author intended to distribute because there is no
+cryptographic signature.
+
+File hashes help detect bit flips -- due to solar flares -- in storage or
+transit, but do not mitigate against malicious package modification to
+packages in storage or transit.
+
+AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+signing keys are valid for which package? Are pre-shared keys then still
+necessary, or do we then rely on a PKI where one compromised CA cert can
+then forge any other cert?
+
+https://theupdateframework.github.io/
+
+
+>
+> On Thu, Mar 22, 2018 at 2:21 PM Nathaniel Smith <njs at pobox.com>ared wrote:
+>
+>> Even if no maintenance were required, it's still a feature that promises
+>> to provide security but doesn't. This kind of feature has negative value.
+>>
+>> I'd also suggest adding a small note to the PEP documenting that the
+>> signing feature didn't work out, and maybe linking to Donald's package
+>> signing blog post. I know updating PEPs isn't the most common thing, but
+>> it's the main documentation of the wheel format and it'll save confusion
+>> later.
+>>
+>> On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com> wrote:
+>>
+>>> What maintenance is required?
+>>>
+>>> Here's a link to the previous discussion of this issue:
+>>>
+>>> "Remove or deprecate wheel-signing features"
+>>> https://github.com/pypa/wheel/issues/196
+>>>
+>>> What has changed? There is still no method for specifying a keyring;
+>>> whereas with GPG, all keys in the ring are trusted.
+>>>
+>>> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>>>
+>>>> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>>>>
+>>>>> I am not changing the format of RECORD, I'm simply removing the
+>>>>> cryptographic signing and verifying functionality, just the way you
+>>>>> described. Hash checking will stay. As we agreed earlier, those
+>>>>> features could be deprecated or removed from the PEP entirely.
+>>>>>
+>>>>
+>>>> Cool, that's what I thought you meant, but I figured I should double
+>>>> check since our discussion was a while ago now :)
+>>>>
+>>>> Cheers,
+>>>> Nick.
+>>>>
+>>>> --
+>>>> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>>>>
+>>>
+>>> _______________________________________________
+>>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>>
+>>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/a785b90e/attachment.html>
+
+From trishank.kuppusamy at datadoghq.com  Thu Mar 22 16:52:55 2018
+From: trishank.kuppusamy at datadoghq.com (Trishank Kuppusamy)
+Date: Thu, 22 Mar 2018 16:52:55 -0400
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+Message-ID: <CAEd-exPcE-+YW_xXLXrNcX5sFvut8LHCTMW-cO2yC==yD-OmCw@mail.gmail.com>
+
+Hi Wes,
+
+On Thu, Mar 22, 2018 at 4:40 PM, Wes Turner <wes.turner at gmail.com> wrote:
+
+>
+> The hashes serve as file integrity check but provide no assurance that
+> they are what the author intended to distribute because there is no
+> cryptographic signature.
+>
+> File hashes help detect bit flips -- due to solar flares -- in storage or
+> transit, but do not mitigate against malicious package modification to
+> packages in storage or transit.
+>
+> AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+> signing keys are valid for which package? Are pre-shared keys then still
+> necessary, or do we then rely on a PKI where one compromised CA cert can
+> then forge any other cert?
+>
+
+Yes, you are right, the hashes need to be signed: otherwise you have
+integrity, but no authenticity.
+
+We wrote PEPs 458 <https://www.python.org/dev/peps/pep-0458/> and 480
+<https://www.python.org/dev/peps/pep-0480/> to discuss how TUF might be
+deployed on PyPI / Warehouse. The PEPs go into details about public key
+distribution. The TLDR is that is that clients (i.e., pip) need to be
+shipped with one self-signed root metadata file, and the rest of the PKI is
+bootstrapped from there. PyPI would act as an authority that distributes,
+revokes, and replaces public keys for packages.
+
+More details on security vs usability also available in our Diplomat
+<https://www.usenix.org/conference/nsdi16/technical-sessions/presentation/kuppusamy>
+paper.
+
+If the community is interested, we'd love to discuss how we could help make
+this happen.
+
+Thanks,
+Trishank
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/e9b55d99/attachment.html>
+
+From jcappos at nyu.edu  Thu Mar 22 16:53:43 2018
+From: jcappos at nyu.edu (Justin Cappos)
+Date: Thu, 22 Mar 2018 16:53:43 -0400
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+Message-ID: <CAMVss_oh_uwf+QUY7J28at1ReD=y=iNjMr9npwL7DKcfo0WVpA@mail.gmail.com>
+
+You don't need a traditional CA for use with TUF or need to worry about a
+single PKI.  TUF is built to be resilient to the compromise of single
+servers / keys.
+
+Typically you would ship the metadata about what keys to trust (TUF's "root
+metadata") with the software installation tool.  This single set of
+pre-shared metadata means you can securely obtain the rest of the
+software.  (I'm happy to go into more detail, but wanted to avoid this
+becoming a barrage of TUF details unless everyone is interested.)
+
+If you don't want to ship the metadata with the tool, you can also have it
+work in a trust-on-first-use model.  This is what Docker does in their
+deployment of TUF.
+
+On Thu, Mar 22, 2018 at 4:40 PM, Wes Turner <wes.turner at gmail.com> wrote:
+
+>
+>
+> On Thursday, March 22, 2018, Daniel Holth <dholth at gmail.com> wrote:
+>
+>> The feature was a building block that was intended to be used in much the
+>> same way that SHA package hashes are used, providing similar security to
+>> the ssh-style TOFU model, but less security than other imaginable public
+>> key systems. The idea was that it could provide more security in practice
+>> because the signatures could exist and be present with the archive, unlike
+>> gpg which provides loads of security in theory only. Unfortunately wheel
+>> signatures were never built up. I don't think anyone was tricked into
+>> believing the primitive provided security on its own.
+>>
+>
+> The hashes serve as file integrity check but provide no assurance that
+> they are what the author intended to distribute because there is no
+> cryptographic signature.
+>
+> File hashes help detect bit flips -- due to solar flares -- in storage or
+> transit, but do not mitigate against malicious package modification to
+> packages in storage or transit.
+>
+> AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+> signing keys are valid for which package? Are pre-shared keys then still
+> necessary, or do we then rely on a PKI where one compromised CA cert can
+> then forge any other cert?
+>
+> https://theupdateframework.github.io/
+>
+>
+>>
+>> On Thu, Mar 22, 2018 at 2:21 PM Nathaniel Smith <njs at pobox.com>ared
+>> wrote:
+>>
+>>> Even if no maintenance were required, it's still a feature that promises
+>>> to provide security but doesn't. This kind of feature has negative value.
+>>>
+>>> I'd also suggest adding a small note to the PEP documenting that the
+>>> signing feature didn't work out, and maybe linking to Donald's package
+>>> signing blog post. I know updating PEPs isn't the most common thing, but
+>>> it's the main documentation of the wheel format and it'll save confusion
+>>> later.
+>>>
+>>> On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com> wrote:
+>>>
+>>>> What maintenance is required?
+>>>>
+>>>> Here's a link to the previous discussion of this issue:
+>>>>
+>>>> "Remove or deprecate wheel-signing features"
+>>>> https://github.com/pypa/wheel/issues/196
+>>>>
+>>>> What has changed? There is still no method for specifying a keyring;
+>>>> whereas with GPG, all keys in the ring are trusted.
+>>>>
+>>>> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>>>>
+>>>>> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>>>>>
+>>>>>> I am not changing the format of RECORD, I'm simply removing the
+>>>>>> cryptographic signing and verifying functionality, just the way you
+>>>>>> described. Hash checking will stay. As we agreed earlier, those
+>>>>>> features could be deprecated or removed from the PEP entirely.
+>>>>>>
+>>>>>
+>>>>> Cool, that's what I thought you meant, but I figured I should double
+>>>>> check since our discussion was a while ago now :)
+>>>>>
+>>>>> Cheers,
+>>>>> Nick.
+>>>>>
+>>>>> --
+>>>>> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>>>>>
+>>>>
+>>>> _______________________________________________
+>>>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>>>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>>>
+>>>> _______________________________________________
+>>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>>
+>>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/1d2331d8/attachment-0001.html>
+
+From alex.gronholm at nextday.fi  Thu Mar 22 17:25:30 2018
+From: alex.gronholm at nextday.fi (alex.gronholm at nextday.fi)
+Date: Thu, 22 Mar 2018 23:25:30 +0200
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+Message-ID: <1521753930.14379.25.camel@nextday.fi>
+
+to, 2018-03-22 kello 16:40 -0400, Wes Turner kirjoitti:
+> On Thursday, March 22, 2018, Daniel Holth <dholth at gmail.com> wrote:
+> > The feature was a building block that was intended to be used in
+> > much the same way that SHA package hashes are used, providing
+> > similar security to the ssh-style TOFU model, but less security
+> > than other imaginable public key systems. The idea was that it
+> > could provide more security in practice because the signatures
+> > could exist and be present with the archive, unlike gpg which
+> > provides loads of security in theory only. Unfortunately wheel
+> > signatures were never built up. I don't think anyone was tricked
+> > into believing the primitive provided security on its own.
+> 
+> The hashes serve as file integrity check but provide no assurance
+> that they are what the author intended to distribute because there is
+> no cryptographic signature.
+> 
+> File hashes help detect bit flips -- due to solar flares -- in
+> storage or transit, but do not mitigate against malicious package
+> modification to packages in storage or transit.
+
+I've been wondering about something ? zip files already contain CRC
+based checksums for each the stored file. What benefit is there in
+storing a RECORD file which basically duplicates this functionality?
+> AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+> signing keys are valid for which package? Are pre-shared keys then
+> still  necessary, or do we then rely on a PKI where one compromised
+> CA cert can then forge any other cert?
+> https://theupdateframework.github.io/ 
+> > On Thu, Mar 22, 2018 at 2:21 PM Nathaniel Smith <njs at pobox.com>ared
+> > wrote:
+> > > Even if no maintenance were required, it's still a feature that
+> > > promises to provide security but doesn't. This kind of feature
+> > > has negative value.
+> > > I'd also suggest adding a small note to the PEP documenting that
+> > > the signing feature didn't work out, and maybe linking to
+> > > Donald's package signing blog post. I know updating PEPs isn't
+> > > the most common thing, but it's the main documentation of the
+> > > wheel format and it'll save confusion later.
+> > > 
+> > > On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com>
+> > > wrote:
+> > > > What maintenance is required?
+> > > > Here's a link to the previous discussion of this issue:
+> > > > 
+> > > > "Remove or deprecate wheel-signing features"
+> > > > https://github.com/pypa/wheel/issues/196
+> > > > 
+> > > > What has changed? There is still no method for specifying a
+> > > > keyring; whereas with GPG, all keys in the ring are trusted.
+> > > > 
+> > > > On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com>
+> > > > wrote:
+> > > > > On 22 March 2018 at 22:35,  <alex.gronholm at nextday.fi>
+> > > > > wrote: 
+> > > > > > I am not changing the format of RECORD, I'm simply removing
+> > > > > > the
+> > > > > > 
+> > > > > > cryptographic signing and verifying functionality, just the
+> > > > > > way you
+> > > > > > 
+> > > > > > described. Hash checking will stay. As we agreed earlier,
+> > > > > > those
+> > > > > > 
+> > > > > > features could be deprecated or removed from the PEP
+> > > > > > entirely.
+> > > > > 
+> > > > > Cool, that's what I thought you meant, but I figured I should
+> > > > > double check since our discussion was a while ago now :)
+> > > > > 
+> > > > > Cheers,
+> > > > > Nick.
+> > > > > 
+> > > > > _______________________________________________
+> > > > > Distutils-SIG maillist  -  Distutils-SIG at python.org
+> > > > > https://mail.python.org/mailman/listinfo/distutils-sig
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/072e9584/attachment.html>
+
+From wes.turner at gmail.com  Thu Mar 22 17:52:43 2018
+From: wes.turner at gmail.com (Wes Turner)
+Date: Thu, 22 Mar 2018 17:52:43 -0400
+Subject: [Distutils] TUF, Warehouse, Pip, PyPA, ld-signatures, ed25519
+Message-ID: <CACfEFw-2OaGgJ7kY0ckdxyXE8DLaJzVtzUc5LNjOFcyCZVshkg@mail.gmail.com>
+
+TUF, Warehouse, Pip, PyPA, ld-signatures, ed
+
+"PEP 480 -- Surviving a Compromise of PyPI"
+https://www.python.org/dev/peps/pep-0458/
+
+"PEP 480 -- Surviving a Compromise of PyPI: The Maximum Security Model"
+https://www.python.org/dev/peps/pep-0480/
+
+
+
+I need to spend time reviewing these PEPs. Backseat driving here; sorry:
+
+Are there pypa/warehouse github issues for implementing the TUF trust root
+support in warehouse; and client support in pip (or a module that pip and
+other tools can use)?
+
+Warehouse is already a SPOF.
+That's a hefty responsibility that contributions should support.
+
+Would [offline] package mirrors and the CDN still work for/with TUF keys?
+
+
+ld-signatures has some normative language that could be useful.
+
+ld-signatures uses URIs for signature suites (a canonicalization algorithm,
+a message digest algorithm, and a signature algorithm) and JSONLD. That
+should be pretty future proof in regards to the NIST post-quantum
+algorithms call that's under review at this time.
+
+Blockcerts builds upon ld-signatures.
+
+There's a compact form of JSONLD.
+JSON[LD] can also be serialized as BSON (and RDFHDT).
+
+"Linked Data Signatures 1.0" (draft)
+https://w3c-dvcg.github.io/ld-signatures/
+
+"Ed25519 Signature 2018" (draft)
+https://w3c-dvcg.github.io/lds-ed25519-2018/
+- canonicalizationAlgorithm: https://w3id.org/security#URDNA2015
+- digestAlgorithm: http://w3id.org/digests#sha512
+- signatureAlgorithm: http://w3id.org/security#ed25519
+
+
+https://theupdateframework.github.io/
+
+https://github.com/theupdateframework/specification/blob/master/tuf-spec.md#the-update-framework-specification
+
+
+On Thursday, March 22, 2018, Trishank Kuppusamy <
+trishank.kuppusamy at datadoghq.com> wrote:
+
+> Hi Wes,
+>
+> On Thu, Mar 22, 2018 at 4:40 PM, Wes Turner <wes.turner at gmail.com> wrote:
+>
+>>
+>> The hashes serve as file integrity check but provide no assurance that
+>> they are what the author intended to distribute because there is no
+>> cryptographic signature.
+>>
+>> File hashes help detect bit flips -- due to solar flares -- in storage or
+>> transit, but do not mitigate against malicious package modification to
+>> packages in storage or transit.
+>>
+>> AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+>> signing keys are valid for which package? Are pre-shared keys then still
+>> necessary, or do we then rely on a PKI where one compromised CA cert can
+>> then forge any other cert?
+>>
+>
+> Yes, you are right, the hashes need to be signed: otherwise you have
+> integrity, but no authenticity.
+>
+> We wrote PEPs 458 <https://www.python.org/dev/peps/pep-0458/> and 480
+> <https://www.python.org/dev/peps/pep-0480/> to discuss how TUF might be
+> deployed on PyPI / Warehouse. The PEPs go into details about public key
+> distribution. The TLDR is that is that clients (i.e., pip) need to be
+> shipped with one self-signed root metadata file, and the rest of the PKI is
+> bootstrapped from there. PyPI would act as an authority that distributes,
+> revokes, and replaces public keys for packages.
+>
+> More details on security vs usability also available in our Diplomat
+> <https://www.usenix.org/conference/nsdi16/technical-sessions/presentation/kuppusamy>
+> paper.
+>
+> If the community is interested, we'd love to discuss how we could help
+> make this happen.
+>
+> Thanks,
+> Trishank
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/deb1d01d/attachment-0001.html>
+
+From wes.turner at gmail.com  Thu Mar 22 17:56:22 2018
+From: wes.turner at gmail.com (Wes Turner)
+Date: Thu, 22 Mar 2018 17:56:22 -0400
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <1521753930.14379.25.camel@nextday.fi>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+ <1521753930.14379.25.camel@nextday.fi>
+Message-ID: <CACfEFw_YzSFySU=vt0guVqf9KwtUwEgEYZ3hXyn=dSbeZr9_XQ@mail.gmail.com>
+
+On Thursday, March 22, 2018, <alex.gronholm at nextday.fi> wrote:
+
+> to, 2018-03-22 kello 16:40 -0400, Wes Turner kirjoitti:
+>
+>
+>
+> On Thursday, March 22, 2018, Daniel Holth <dholth at gmail.com> wrote:
+>
+> The feature was a building block that was intended to be used in much the
+> same way that SHA package hashes are used, providing similar security to
+> the ssh-style TOFU model, but less security than other imaginable public
+> key systems. The idea was that it could provide more security in practice
+> because the signatures could exist and be present with the archive, unlike
+> gpg which provides loads of security in theory only. Unfortunately wheel
+> signatures were never built up. I don't think anyone was tricked into
+> believing the primitive provided security on its own.
+>
+>
+> The hashes serve as file integrity check but provide no assurance that
+> they are what the author intended to distribute because there is no
+> cryptographic signature.
+>
+> File hashes help detect bit flips -- due to solar flares -- in storage or
+> transit, but do not mitigate against malicious package modification to
+> packages in storage or transit.
+>
+>
+> I've been wondering about something ? zip files already contain CRC based
+> checksums for each the stored file. What benefit is there in storing a
+> RECORD file which basically duplicates this functionality?
+>
+
+AFAIU, there's no good way to do post-install hash verification like
+`debsums` and `rpm -V` with zip CRCs (though it's probably possible if
+there's a structured log of installed packages).
+
+
+>
+>
+> AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+> signing keys are valid for which package? Are pre-shared keys then still
+> necessary, or do we then rely on a PKI where one compromised CA cert can
+> then forge any other cert?
+>
+> https://theupdateframework.github.io/
+>
+>
+>
+> On Thu, Mar 22, 2018 at 2:21 PM Nathaniel Smith <njs at pobox.com>ared wrote:
+>
+> Even if no maintenance were required, it's still a feature that promises
+> to provide security but doesn't. This kind of feature has negative value.
+>
+> I'd also suggest adding a small note to the PEP documenting that the
+> signing feature didn't work out, and maybe linking to Donald's package
+> signing blog post. I know updating PEPs isn't the most common thing, but
+> it's the main documentation of the wheel format and it'll save confusion
+> later.
+>
+> On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com> wrote:
+>
+> What maintenance is required?
+>
+> Here's a link to the previous discussion of this issue:
+>
+> "Remove or deprecate wheel-signing features"
+> https://github.com/pypa/wheel/issues/196
+>
+> What has changed? There is still no method for specifying a keyring;
+> whereas with GPG, all keys in the ring are trusted.
+>
+> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>
+> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>
+> I am not changing the format of RECORD, I'm simply removing the
+> cryptographic signing and verifying functionality, just the way you
+> described. Hash checking will stay. As we agreed earlier, those
+> features could be deprecated or removed from the PEP entirely.
+>
+>
+> Cool, that's what I thought you meant, but I figured I should double check
+> since our discussion was a while ago now :)
+>
+> Cheers,
+> Nick.
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.orghttps://mail.python.org/mailman/listinfo/distutils-sig
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/155f8ffe/attachment.html>
+
+From thomas at kluyver.me.uk  Thu Mar 22 17:56:57 2018
+From: thomas at kluyver.me.uk (Thomas Kluyver)
+Date: Thu, 22 Mar 2018 21:56:57 +0000
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <1521753930.14379.25.camel@nextday.fi>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+ <1521753930.14379.25.camel@nextday.fi>
+Message-ID: <1521755817.233727.1312880472.4963E5CE@webmail.messagingengine.com>
+
+On Thu, Mar 22, 2018, at 9:25 PM, alex.gronholm at nextday.fi wrote:
+> I've been wondering about something ? zip files already contain CRC
+> based checksums for each the stored file. What benefit is there in
+> storing a RECORD file which basically duplicates this functionality?
+In terms of providing a foundation for security checks, I think CRC
+checksums are insufficient - they are meant to detect random data
+corruption, not a deliberate effort to make a malicious file.
+You could simply use a cryptographic hash of the entire wheel zip file.
+I guess the advantage of storing file hashes in RECORD is that they can
+be checked against the installed code, not just the wheel package.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/692f2abc/attachment.html>
+
+From wes.turner at gmail.com  Thu Mar 22 18:00:21 2018
+From: wes.turner at gmail.com (Wes Turner)
+Date: Thu, 22 Mar 2018 18:00:21 -0400
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <CAMVss_oh_uwf+QUY7J28at1ReD=y=iNjMr9npwL7DKcfo0WVpA@mail.gmail.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+ <CAMVss_oh_uwf+QUY7J28at1ReD=y=iNjMr9npwL7DKcfo0WVpA@mail.gmail.com>
+Message-ID: <CACfEFw9ZcEGsGRBt_wP5C5gMcDCbTNRvEJarLnj8zgyfn6P4pw@mail.gmail.com>
+
+On Thursday, March 22, 2018, Justin Cappos <jcappos at nyu.edu> wrote:
+
+> You don't need a traditional CA for use with TUF or need to worry about a
+> single PKI.  TUF is built to be resilient to the compromise of single
+> servers / keys.
+>
+> Typically you would ship the metadata about what keys to trust (TUF's
+> "root metadata") with the software installation tool.  This single set of
+> pre-shared metadata means you can securely obtain the rest of the
+> software.  (I'm happy to go into more detail, but wanted to avoid this
+> becoming a barrage of TUF details unless everyone is interested.)
+>
+> If you don't want to ship the metadata with the tool, you can also have it
+> work in a trust-on-first-use model.  This is what Docker does in their
+> deployment of TUF.
+>
+
+[Distutils] TUF, Warehouse, Pip, PyPA, ld-signatures, ed25519
+https://mail.python.org/pipermail/distutils-sig/2018-March/032081.html
+
+I split the thread. Thanks for the explanation.
+
+
+>
+> On Thu, Mar 22, 2018 at 4:40 PM, Wes Turner <wes.turner at gmail.com> wrote:
+>
+>>
+>>
+>> On Thursday, March 22, 2018, Daniel Holth <dholth at gmail.com> wrote:
+>>
+>>> The feature was a building block that was intended to be used in much
+>>> the same way that SHA package hashes are used, providing similar security
+>>> to the ssh-style TOFU model, but less security than other imaginable public
+>>> key systems. The idea was that it could provide more security in practice
+>>> because the signatures could exist and be present with the archive, unlike
+>>> gpg which provides loads of security in theory only. Unfortunately wheel
+>>> signatures were never built up. I don't think anyone was tricked into
+>>> believing the primitive provided security on its own.
+>>>
+>>
+>> The hashes serve as file integrity check but provide no assurance that
+>> they are what the author intended to distribute because there is no
+>> cryptographic signature.
+>>
+>> File hashes help detect bit flips -- due to solar flares -- in storage or
+>> transit, but do not mitigate against malicious package modification to
+>> packages in storage or transit.
+>>
+>> AFAIU, TUF (The Update Framework) has a mechanism for limiting which
+>> signing keys are valid for which package? Are pre-shared keys then still
+>> necessary, or do we then rely on a PKI where one compromised CA cert can
+>> then forge any other cert?
+>>
+>> https://theupdateframework.github.io/
+>>
+>>
+>>>
+>>> On Thu, Mar 22, 2018 at 2:21 PM Nathaniel Smith <njs at pobox.com>ared
+>>> wrote:
+>>>
+>>>> Even if no maintenance were required, it's still a feature that
+>>>> promises to provide security but doesn't. This kind of feature has negative
+>>>> value.
+>>>>
+>>>> I'd also suggest adding a small note to the PEP documenting that the
+>>>> signing feature didn't work out, and maybe linking to Donald's package
+>>>> signing blog post. I know updating PEPs isn't the most common thing, but
+>>>> it's the main documentation of the wheel format and it'll save confusion
+>>>> later.
+>>>>
+>>>> On Mar 22, 2018 10:57 AM, "Wes Turner" <wes.turner at gmail.com> wrote:
+>>>>
+>>>>> What maintenance is required?
+>>>>>
+>>>>> Here's a link to the previous discussion of this issue:
+>>>>>
+>>>>> "Remove or deprecate wheel-signing features"
+>>>>> https://github.com/pypa/wheel/issues/196
+>>>>>
+>>>>> What has changed? There is still no method for specifying a keyring;
+>>>>> whereas with GPG, all keys in the ring are trusted.
+>>>>>
+>>>>> On Thursday, March 22, 2018, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>>>>>
+>>>>>> On 22 March 2018 at 22:35, <alex.gronholm at nextday.fi> wrote:
+>>>>>>
+>>>>>>> I am not changing the format of RECORD, I'm simply removing the
+>>>>>>> cryptographic signing and verifying functionality, just the way you
+>>>>>>> described. Hash checking will stay. As we agreed earlier, those
+>>>>>>> features could be deprecated or removed from the PEP entirely.
+>>>>>>>
+>>>>>>
+>>>>>> Cool, that's what I thought you meant, but I figured I should double
+>>>>>> check since our discussion was a while ago now :)
+>>>>>>
+>>>>>> Cheers,
+>>>>>> Nick.
+>>>>>>
+>>>>>> --
+>>>>>> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>>>>>>
+>>>>>
+>>>>> _______________________________________________
+>>>>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>>>>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>>>>
+>>>>> _______________________________________________
+>>>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>>>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>>>
+>>>
+>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/971c0759/attachment-0001.html>
+
+From jcappos at nyu.edu  Thu Mar 22 18:15:44 2018
+From: jcappos at nyu.edu (Justin Cappos)
+Date: Thu, 22 Mar 2018 18:15:44 -0400
+Subject: [Distutils] TUF, Warehouse, Pip, PyPA, ld-signatures, ed25519
+In-Reply-To: <CACfEFw-2OaGgJ7kY0ckdxyXE8DLaJzVtzUc5LNjOFcyCZVshkg@mail.gmail.com>
+References: <CACfEFw-2OaGgJ7kY0ckdxyXE8DLaJzVtzUc5LNjOFcyCZVshkg@mail.gmail.com>
+Message-ID: <CAMVss_oGEzjdO=qPARMiNy_+jpsZQrHcStYx0qQ=b1FzEguXww@mail.gmail.com>
+
+> Warehouse is already a SPOF.
+> That's a hefty responsibility that contributions should support.
+>
+
+Warehouse doesn't need to be a SPOF.  A compromise of the Warehouse server
+(and all keys on it) need not allow an attacker to compromise many users.
+The details are in the Diplomat
+<https://www.usenix.org/conference/nsdi16/technical-sessions/presentation/kuppusamy>
+ paper, but the gist is that you can have some rarely used, offline keys
+that are stored by folks like Donald, etc. and a quorum of those trusted
+users would need to be malicious to cause substantial harm to users.
+
+However, you can have whatever trust / key distribution / storage model
+makes sense.  TUF doesn't force you to use some pre-ordained model.  It has
+flexibility to support a variety of workflows, including many with good
+security properties.
+
+Would [offline] package mirrors and the CDN still work for/with TUF keys?
+>
+
+Yes, this works just fine.  CDNs / mirrors do not change in any way.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/e1478ceb/attachment.html>
+
+From trishank.kuppusamy at datadoghq.com  Thu Mar 22 18:18:05 2018
+From: trishank.kuppusamy at datadoghq.com (Trishank Kuppusamy)
+Date: Thu, 22 Mar 2018 18:18:05 -0400
+Subject: [Distutils] TUF, Warehouse, Pip, PyPA, ld-signatures, ed25519
+In-Reply-To: <CAMVss_oGEzjdO=qPARMiNy_+jpsZQrHcStYx0qQ=b1FzEguXww@mail.gmail.com>
+References: <CACfEFw-2OaGgJ7kY0ckdxyXE8DLaJzVtzUc5LNjOFcyCZVshkg@mail.gmail.com>
+ <CAMVss_oGEzjdO=qPARMiNy_+jpsZQrHcStYx0qQ=b1FzEguXww@mail.gmail.com>
+Message-ID: <CAEd-exNYsLkn6yBZcPOd3XmB_ePPLzBfnCmadRoaypeLjSJ0hg@mail.gmail.com>
+
+On Thu, Mar 22, 2018 at 6:15 PM, Justin Cappos <jcappos at nyu.edu> wrote:
+
+>
+>
+>> Warehouse is already a SPOF.
+>> That's a hefty responsibility that contributions should support.
+>>
+>
+> Warehouse doesn't need to be a SPOF.  A compromise of the Warehouse server
+> (and all keys on it) need not allow an attacker to compromise many users.
+> The details are in the Diplomat
+> <https://www.usenix.org/conference/nsdi16/technical-sessions/presentation/kuppusamy>
+>  paper, but the gist is that you can have some rarely used, offline keys
+> that are stored by folks like Donald, etc. and a quorum of those trusted
+> users would need to be malicious to cause substantial harm to users.
+>
+> However, you can have whatever trust / key distribution / storage model
+> makes sense.  TUF doesn't force you to use some pre-ordained model.  It has
+> flexibility to support a variety of workflows, including many with good
+> security properties.
+>
+> Would [offline] package mirrors and the CDN still work for/with TUF keys?
+>>
+>
+> Yes, this works just fine.  CDNs / mirrors do not change in any way.
+>
+
++1
+
+(I'm logging off work for today, but happy to discuss more tomorrow)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180322/ebfc5c8e/attachment.html>
+
+From alex.gronholm at nextday.fi  Fri Mar 23 02:56:08 2018
+From: alex.gronholm at nextday.fi (alex.gronholm at nextday.fi)
+Date: Fri, 23 Mar 2018 08:56:08 +0200
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <1521755817.233727.1312880472.4963E5CE@webmail.messagingengine.com>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+ <1521753930.14379.25.camel@nextday.fi>
+ <1521755817.233727.1312880472.4963E5CE@webmail.messagingengine.com>
+Message-ID: <1521788168.14379.27.camel@nextday.fi>
+
+to, 2018-03-22 kello 21:56 +0000, Thomas Kluyver kirjoitti:
+> On Thu, Mar 22, 2018, at 9:25 PM, alex.gronholm at nextday.fi wrote:
+> 
+> > I've been wondering about something ? zip files already contain CRC
+> > based checksums for each the stored file. What benefit is there in
+> > storing a RECORD file which basically duplicates this
+> > functionality?
+> > 
+> 
+> In terms of providing a foundation for security checks, I think CRC
+> checksums are insufficient - they are meant to detect random data
+> corruption, not a deliberate effort to make a malicious file.
+
+If someone wanted to make a malicious file, what's preventing them from
+modifying the RECORD to match the modified file when there is no
+cryptographic signing involved?
+> 
+> You could simply use a cryptographic hash of the entire wheel zip
+> file. I guess the advantage of storing file hashes in RECORD is that
+> they can be checked against the installed code, not just the wheel
+> package.
+> 
+> 
+> 
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180323/edf3ffac/attachment.html>
+
+From thomas at kluyver.me.uk  Fri Mar 23 03:45:18 2018
+From: thomas at kluyver.me.uk (Thomas Kluyver)
+Date: Fri, 23 Mar 2018 07:45:18 +0000
+Subject: [Distutils] Removing wheel signing features from the wheel
+ library
+In-Reply-To: <1521788168.14379.27.camel@nextday.fi>
+References: <1521659009.14379.6.camel@nextday.fi>
+ <CADiSq7dt6Xh=NHP46DdW65Ptvf1sowyjx+UufHqLXNGiN0tvRA@mail.gmail.com>
+ <1521722108.14379.11.camel@nextday.fi>
+ <CADiSq7ety8-YCtJjZ-a1iPbtuDBZHPgypSD9h6NZzAidg90Jdg@mail.gmail.com>
+ <CACfEFw9GFzNqH3QR848SKuziDDNE2SHDYDfY139HOm74SN3UtA@mail.gmail.com>
+ <CAPJVwBkYmmXQe4upBwqWC=JgDjY1ZzQ1SKS5GJ2ZLDczU7xgBg@mail.gmail.com>
+ <CAG8k2+6NkKerHU3AGFKLo-0jjQ0DG=2OfQ-hPYZ7c2wTg6BYZw@mail.gmail.com>
+ <CACfEFw-V4Rt2w-wGUGBpGGhDjJ1F2BsCBy=VRo3Bfh_hkkH_oQ@mail.gmail.com>
+ <1521753930.14379.25.camel@nextday.fi>
+ <1521755817.233727.1312880472.4963E5CE@webmail.messagingengine.com>
+ <1521788168.14379.27.camel@nextday.fi>
+Message-ID: <1521791118.2442517.1313262528.3F34AEE8@webmail.messagingengine.com>
+
+On Fri, Mar 23, 2018, at 6:56 AM, alex.gronholm at nextday.fi wrote:
+> If someone wanted to make a malicious file, what's preventing them
+> from modifying the RECORD to match the modified file when there is no
+> cryptographic signing involved?
+Right: you need a way to verify RECORD on top of that. Like the signatures, or way to distribute hashes of RECORD files separately. The hashes in RECORD are a foundation for building security systems, not a security system in themselves.
+Thomas
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180323/e752acd0/attachment-0001.html>
+
+From mmangoba at python.org  Fri Mar 23 11:14:13 2018
+From: mmangoba at python.org (Mark Mangoba)
+Date: Fri, 23 Mar 2018 08:14:13 -0700
+Subject: [Distutils] PEP 541 - Accepted
+Message-ID: <CAHCFs7fMm86EtK6FqXex3qo97yrmx=4rPwKaQtC8Hc7V4MfCbA@mail.gmail.com>
+
+Hi All,
+
+As the BDFL-Delegate,  I?m happy to announce PEP 541 has been accepted.
+
+PEP 541 has been voted by the packaging-wg (https://wiki.python.org/psf/P
+ackagingWG/Charter):
+
+   - Donald Stufft
+   - Dustin Ingram
+   - Ernest W. Durbin III
+   - Ewa Jodlowska
+   - Kenneth Reitz
+   - Mark Mangoba
+   - Nathaniel J. Smith
+   - Nick Coghlan
+   - Nicole Harris
+   - Sumana Harihareswara
+
+Thank you to the packaging-wg and to everyone that has contributed to PEP
+541.
+
+Best regards,
+Mark
+
+-- 
+Mark Mangoba | PSF IT Manager | Python Software Foundation |
+mmangoba at python.org | python.org | Infrastructure Staff:
+infrastructure-staff at python.org | GPG: 2DE4 D92B 739C 649B EBB8 CCF6 DC05
+E024 5F4C A0D1
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180323/8f685b6f/attachment.html>
+
+From chris.jerdonek at gmail.com  Sun Mar 25 17:47:07 2018
+From: chris.jerdonek at gmail.com (Chris Jerdonek)
+Date: Sun, 25 Mar 2018 14:47:07 -0700
+Subject: [Distutils] quickly installing packages in "editable" mode
+Message-ID: <CAOTb1wcR2ZA61WRc6x1C-7U-7RiThmYcsfKbcx1KLCz8uywSSg@mail.gmail.com>
+
+Hi,
+
+I'm interested in finding ways to speed up a development workflow that
+involves installing several local packages in "editable" mode in a
+Docker image.
+
+For example, if I use `pip install -e project1 -e project2 ...` in a
+certain case, it takes on the order of 3-4 seconds. But if I create
+the .egg-link files, .egg-info directories, etc. "by hand," it only
+takes on the order of 0.07 seconds.
+
+I'm okay with using a hacky solution because these are simple, pure
+Python projects and it's in a development environment, but if I can
+rely on existing third-party libraries (via Python, not subprocess),
+that would be ideal.
+
+Do people know of libraries that can help with this sort of thing? As
+another example, it seems like one of the steps is to update
+"site-packages/easy-install.pth", but setuptools doesn't seem to
+expose this as a stand-alone function. I also briefly glanced at
+things like distlib, the "site" module, and pkg_resources, but I
+didn't seem to see an API for updating a .pth file. Or maybe I can
+bypass having to create / update a ".pth" by using symlinks.
+
+Thanks,
+--Chris
+
+From sh at changeset.nyc  Mon Mar 26 12:01:13 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Mon, 26 Mar 2018 12:01:13 -0400
+Subject: [Distutils] Warehouse is in beta
+Message-ID: <21c865b3-334e-2e40-1a31-b765e2d84655@changeset.nyc>
+
+As of today, the new Python Package Index at pypi.org, powered by
+Warehouse, is in beta. What does that mean?
+
+>From https://pypi.org/help/#beta :
+
+The site is robust, but not *fully* tested and 'production ready'. This
+means:
+
+* The UI may return unusual or erroneous results
+* Performance may not yet be optimised
+* Some features that you used in the old interface (pypi.python.org) may
+be missing
+* We need your feedback to get the site production ready
+
+While we are in beta, the pypi.org infrastructure cannot yet support all
+of the API traffic generated by our users running pip install, so don't
+explicitly point to it in automated production setups. But we want you
+to try it and test it, and we're occasionally redirecting portions of
+that traffic in load tests we announce on our status page.
+
+Uploads, search, and release management are working well, and project
+maintainers and owners should use this version of PyPI over the legacy
+site, which no longer supports uploading releases.
+
+More at
+https://pyfound.blogspot.com/2018/03/warehouse-all-new-pypi-is-now-in-beta.html
+. Congrats and thanks to the team, and onwards to the next milestone
+(see https://wiki.python.org/psf/WarehouseRoadmap ), the launch and
+redirect!
+
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From sh at changeset.nyc  Mon Mar 26 17:13:11 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Mon, 26 Mar 2018 17:13:11 -0400
+Subject: [Distutils] IRC/Twitter livechat hours March 27-April 5
+Message-ID: <759b103e-6452-0f5d-1013-7e51a07a6dad@changeset.nyc>
+
+Warehouse developers will be in IRC, in #pypa-dev on Freenode, and on
+Twitter (hashtag: #newpypi), available to talk about problems you run
+into, or about how to hack on Warehouse, for four livechats over the
+next few weeks:
+
+
+1. Tuesday, March 27th, 9am-10am PDT, noon-1pm EDT, 18:00-19:00 CEST,
+9:30pm-10:30pm India, 16:00-17:00 UTC
+https://www.timeanddate.com/worldclock/fixedtime.html?msg=Warehouse/PyPI+beta+chat&iso=20180327T16&p1=:&ah=1
+
+
+2. Friday, March 30th, 10-11am EDT, 16:00-17:00 CEST, 7:30pm-8:30pm
+India, 14:00-15:00 UTC
+https://www.timeanddate.com/worldclock/fixedtime.html?msg=Warehouse/PyPI+beta+live+chat&iso=20180330T14&p1=1440&ah=1
+
+
+3.  Tuesday, April 3rd, 8am-9am PDT, 11am-noon EDT, 17:00-18:00 CEST,
+8:30pm-9:30pm India, 15:00-16:00 UTC
+https://www.timeanddate.com/worldclock/fixedtime.html?msg=Warehouse/PyPI+beta+livechat&iso=20180403T10&p1=24&ah=1
+
+
+4. Thursday, April 5th, 5pm-6pm PDT, 8pm-9pm EDT, (April 5th) 8am-9am
+Manila, (April 5th) 10am-11am Melbourne, (April 5th) 0:00-1:00 UTC
+https://www.timeanddate.com/worldclock/fixedtime.html?p1=24&iso=20180405T19&msg=Warehouse/PyPI%20beta%20livechat&ah=1&low=4
+
+
+Feel free to drop in! (By participating, you agree to abide by the PyPA
+Code of Conduct: https://www.pypa.io/en/latest/code-of-conduct/ .)
+-- 
+Sumana Harihareswara
+Changeset Consulting
+https://changeset.nyc
+
+From naoki_morihira at outlook.jp  Tue Mar 27 02:06:41 2018
+From: naoki_morihira at outlook.jp (?? ??)
+Date: Tue, 27 Mar 2018 06:06:41 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+Message-ID: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+
+I would like to install openpyxl, and
+I installed Python shown as follows:
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit (Intel)] on win32
+
+But as the following situation shows, I cannot succeed installing openpyxl.
+
+>>> pip install openpyxl
+  File "<stdin>", line 1
+    pip install openpyxl
+              ^
+SyntaxError: invalid syntax
+
+How can I succeed installing openpyxl ?
+
+Best Regards,
+---------------------
+Naoki Morihira
+TEL: 01181-90-6460-6265
+---------------------
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180327/0315fd3e/attachment.html>
+
+From brett at python.org  Tue Mar 27 12:44:57 2018
+From: brett at python.org (Brett Cannon)
+Date: Tue, 27 Mar 2018 16:44:57 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+Message-ID: <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+
+For general help to get started with Python I would recommend the
+python-tutor mailing list; this one is for discussing the development of
+how to package things in Python.
+
+But in your specific case you typed the command in Python's REPL and not at
+the terminal. For further help please ask on python-tutor.
+
+On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp> wrote:
+
+> I would like to install openpyxl, and
+>
+> I installed Python shown as follows:
+>
+> Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit
+> (Intel)] on win32
+>
+>
+>
+> But as the following situation shows, I cannot succeed installing
+> openpyxl.
+>
+>
+>
+> >>> pip install openpyxl
+>
+>   File "<stdin>", line 1
+>
+>     pip install openpyxl
+>
+>               ^
+>
+> SyntaxError: invalid syntax
+>
+>
+>
+> How can I succeed installing openpyxl ?
+>
+>
+>
+> Best Regards,
+>
+> ---------------------
+> Naoki Morihira
+> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+> ---------------------
+>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180327/285bff52/attachment.html>
+
+From naoki_morihira at outlook.jp  Tue Mar 27 13:04:11 2018
+From: naoki_morihira at outlook.jp (=?iso-2022-jp?B?GyRCPzlKPxsoQiAbJEJEPjx5GyhC?=)
+Date: Tue, 27 Mar 2018 17:04:11 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>,
+ <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+Message-ID: <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+
+Brett,
+
+Thank you for responding me.
+Could you tell me the e-mail address of the python-tutor ?
+And if you have something even a little to be a hint to resolve this syntax error, it is appreciated to teach me.
+
+Best Regards,
+---------------------
+Naoki Morihira
+TEL: 01181-90-6460-6265<tel:+81%2090-6460-6265>
+---------------------
+
+________________________________
+???: Brett Cannon <brett at python.org>
+????: Tuesday, March 27, 2018 9:44:57 AM
+??: ?? ??
+CC: distutils-sig at python.org
+??: Re: [Distutils] Need how to install 3rd party python modules
+
+For general help to get started with Python I would recommend the python-tutor mailing list; this one is for discussing the development of how to package things in Python.
+
+But in your specific case you typed the command in Python's REPL and not at the terminal. For further help please ask on python-tutor.
+
+On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp<mailto:naoki_morihira at outlook.jp>> wrote:
+I would like to install openpyxl, and
+I installed Python shown as follows:
+Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit (Intel)] on win32
+
+But as the following situation shows, I cannot succeed installing openpyxl.
+
+>>> pip install openpyxl
+  File "<stdin>", line 1
+    pip install openpyxl
+              ^
+SyntaxError: invalid syntax
+
+How can I succeed installing openpyxl ?
+
+Best Regards,
+---------------------
+Naoki Morihira
+TEL: 01181-90-6460-6265<tel:+81%2090-6460-6265>
+---------------------
+
+_______________________________________________
+Distutils-SIG maillist  -  Distutils-SIG at python.org<mailto:Distutils-SIG at python.org>
+https://mail.python.org/mailman/listinfo/distutils-sig
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180327/fea13f9d/attachment-0001.html>
+
+From matthew.brett at gmail.com  Tue Mar 27 16:20:35 2018
+From: matthew.brett at gmail.com (Matthew Brett)
+Date: Tue, 27 Mar 2018 21:20:35 +0100
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+ <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+ <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+Message-ID: <CAH6Pt5o2ZbgoZmYG82jXSx-ObDD_yJGCR2xXWzxng==R+ffyBg@mail.gmail.com>
+
+Hi,
+
+Brett is just saying that you should first open a "cmd" shell, and, at
+the cmd prompt, type:
+
+pip install openpyxl
+
+Your problem (which is relatively common) is that you were typing the
+command at the Python prompt, instead of the cmd prompt.
+
+Best,
+
+Matthew
+
+
+On Tue, Mar 27, 2018 at 6:04 PM, ?? ?? <naoki_morihira at outlook.jp> wrote:
+> Brett,
+>
+>
+>
+> Thank you for responding me.
+>
+> Could you tell me the e-mail address of the python-tutor ?
+>
+> And if you have something even a little to be a hint to resolve this syntax
+> error, it is appreciated to teach me.
+>
+>
+>
+> Best Regards,
+>
+> ---------------------
+> Naoki Morihira
+> TEL: 01181-90-6460-6265
+> ---------------------
+>
+>
+>
+> ________________________________
+> ???: Brett Cannon <brett at python.org>
+> ????: Tuesday, March 27, 2018 9:44:57 AM
+> ??: ?? ??
+> CC: distutils-sig at python.org
+> ??: Re: [Distutils] Need how to install 3rd party python modules
+>
+> For general help to get started with Python I would recommend the
+> python-tutor mailing list; this one is for discussing the development of how
+> to package things in Python.
+>
+> But in your specific case you typed the command in Python's REPL and not at
+> the terminal. For further help please ask on python-tutor.
+>
+> On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp> wrote:
+>>
+>> I would like to install openpyxl, and
+>>
+>> I installed Python shown as follows:
+>>
+>> Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit
+>> (Intel)] on win32
+>>
+>>
+>>
+>> But as the following situation shows, I cannot succeed installing
+>> openpyxl.
+>>
+>>
+>>
+>> >>> pip install openpyxl
+>>
+>>   File "<stdin>", line 1
+>>
+>>     pip install openpyxl
+>>
+>>               ^
+>>
+>> SyntaxError: invalid syntax
+>>
+>>
+>>
+>> How can I succeed installing openpyxl ?
+>>
+>>
+>>
+>> Best Regards,
+>>
+>> ---------------------
+>> Naoki Morihira
+>> TEL: 01181-90-6460-6265
+>> ---------------------
+>>
+>>
+>>
+>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+
+From brett at python.org  Tue Mar 27 20:48:32 2018
+From: brett at python.org (Brett Cannon)
+Date: Wed, 28 Mar 2018 00:48:32 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+ <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+ <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+Message-ID: <CAP1=2W7pgyAPswMXZcmFutqkMwREPS5+3A=OyqR+-OzUzR7iew@mail.gmail.com>
+
+https://mail.python.org/mailman/listinfo/tutor
+
+On Tue, 27 Mar 2018 at 10:38 ?? ?? <naoki_morihira at outlook.jp> wrote:
+
+> Brett,
+>
+>
+>
+> Thank you for responding me.
+>
+> Could you tell me the e-mail address of the python-tutor ?
+>
+> And if you have something even a little to be a hint to resolve this
+> syntax error, it is appreciated to teach me.
+>
+>
+>
+> Best Regards,
+>
+> ---------------------
+> Naoki Morihira
+> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+> ---------------------
+>
+>
+> ------------------------------
+> *???:* Brett Cannon <brett at python.org>
+> *????:* Tuesday, March 27, 2018 9:44:57 AM
+> *??:* ?? ??
+> *CC:* distutils-sig at python.org
+> *??:* Re: [Distutils] Need how to install 3rd party python modules
+>
+> For general help to get started with Python I would recommend the
+> python-tutor mailing list; this one is for discussing the development of
+> how to package things in Python.
+>
+> But in your specific case you typed the command in Python's REPL and not
+> at the terminal. For further help please ask on python-tutor.
+>
+> On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp> wrote:
+>
+>> I would like to install openpyxl, and
+>>
+>> I installed Python shown as follows:
+>>
+>> Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit
+>> (Intel)] on win32
+>>
+>>
+>>
+>> But as the following situation shows, I cannot succeed installing
+>> openpyxl.
+>>
+>>
+>>
+>> >>> pip install openpyxl
+>>
+>>   File "<stdin>", line 1
+>>
+>>     pip install openpyxl
+>>
+>>               ^
+>>
+>> SyntaxError: invalid syntax
+>>
+>>
+>>
+>> How can I succeed installing openpyxl ?
+>>
+>>
+>>
+>> Best Regards,
+>>
+>> ---------------------
+>> Naoki Morihira
+>> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+>> ---------------------
+>>
+>>
+>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180328/4214fe54/attachment.html>
+
+From naoki_morihira at outlook.jp  Wed Mar 28 01:49:32 2018
+From: naoki_morihira at outlook.jp (=?iso-2022-jp?B?GyRCPzlKPxsoQiAbJEJEPjx5GyhC?=)
+Date: Wed, 28 Mar 2018 05:49:32 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <CAH6Pt5o2ZbgoZmYG82jXSx-ObDD_yJGCR2xXWzxng==R+ffyBg@mail.gmail.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+ <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+ <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>,
+ <CAH6Pt5o2ZbgoZmYG82jXSx-ObDD_yJGCR2xXWzxng==R+ffyBg@mail.gmail.com>
+Message-ID: <BN1PR0101MB08678EB1E644979F253C699291A30@BN1PR0101MB0867.prod.exchangelabs.com>
+
+Mathew,
+
+Thank you for your quick response.
+
+Does ?cmd? shell mean MS-Windows command prompt ?
+
+I executed in Windows command prompt and the result is shown below:
+
+C:\Users\N.Morihira>pip install openpyxl
+Pip is not recognized as executable command at Windows command prompt and so is Python command line.
+
+
+Best Regards,
+---------------------
+Naoki Morihira
+TEL: 01181-90-6460-6265
+---------------------
+
+???: Matthew Brett<mailto:matthew.brett at gmail.com>
+????: 2018?3?27? 13:21
+??: ?? ??<mailto:naoki_morihira at outlook.jp>
+CC: Brett Cannon<mailto:brett at python.org>; distutils-sig at python.org<mailto:distutils-sig at python.org>
+??: Re: [Distutils] Need how to install 3rd party python modules
+
+Hi,
+
+Brett is just saying that you should first open a "cmd" shell, and, at
+the cmd prompt, type:
+
+pip install openpyxl
+
+Your problem (which is relatively common) is that you were typing the
+command at the Python prompt, instead of the cmd prompt.
+
+Best,
+
+Matthew
+
+
+On Tue, Mar 27, 2018 at 6:04 PM, ?? ?? <naoki_morihira at outlook.jp> wrote:
+> Brett,
+>
+>
+>
+> Thank you for responding me.
+>
+> Could you tell me the e-mail address of the python-tutor ?
+>
+> And if you have something even a little to be a hint to resolve this syntax
+> error, it is appreciated to teach me.
+>
+>
+>
+> Best Regards,
+>
+> ---------------------
+> Naoki Morihira
+> TEL: 01181-90-6460-6265
+> ---------------------
+>
+>
+>
+> ________________________________
+> ???: Brett Cannon <brett at python.org>
+> ????: Tuesday, March 27, 2018 9:44:57 AM
+> ??: ?? ??
+> CC: distutils-sig at python.org
+> ??: Re: [Distutils] Need how to install 3rd party python modules
+>
+> For general help to get started with Python I would recommend the
+> python-tutor mailing list; this one is for discussing the development of how
+> to package things in Python.
+>
+> But in your specific case you typed the command in Python's REPL and not at
+> the terminal. For further help please ask on python-tutor.
+>
+> On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp> wrote:
+>>
+>> I would like to install openpyxl, and
+>>
+>> I installed Python shown as follows:
+>>
+>> Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit
+>> (Intel)] on win32
+>>
+>>
+>>
+>> But as the following situation shows, I cannot succeed installing
+>> openpyxl.
+>>
+>>
+>>
+>> >>> pip install openpyxl
+>>
+>>   File "<stdin>", line 1
+>>
+>>     pip install openpyxl
+>>
+>>               ^
+>>
+>> SyntaxError: invalid syntax
+>>
+>>
+>>
+>> How can I succeed installing openpyxl ?
+>>
+>>
+>>
+>> Best Regards,
+>>
+>> ---------------------
+>> Naoki Morihira
+>> TEL: 01181-90-6460-6265
+>> ---------------------
+>>
+>>
+>>
+>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180328/c7b09dc2/attachment-0001.html>
+
+From brett at python.org  Wed Mar 28 13:36:25 2018
+From: brett at python.org (Brett Cannon)
+Date: Wed, 28 Mar 2018 17:36:25 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <BN1PR0101MB08678EB1E644979F253C699291A30@BN1PR0101MB0867.prod.exchangelabs.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+ <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+ <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+ <CAH6Pt5o2ZbgoZmYG82jXSx-ObDD_yJGCR2xXWzxng==R+ffyBg@mail.gmail.com>
+ <BN1PR0101MB08678EB1E644979F253C699291A30@BN1PR0101MB0867.prod.exchangelabs.com>
+Message-ID: <CAP1=2W58g2Fj=Km_0wVF-9E_yTSXb3fqzGxjDAHxS8N4+BVBew@mail.gmail.com>
+
+If you're on Windows the command would be `py -m pip install openpyxl`
+(since it sounds like you didn't check the box at install time to add
+python to your PATH), although I would suggest doing `py -m pip install
+--user openpyxl` instead (a virtual environment would be better, but
+explaining that is off-topic for this mailing list).
+
+On Tue, 27 Mar 2018 at 23:04 ?? ?? <naoki_morihira at outlook.jp> wrote:
+
+> Mathew,
+>
+>
+>
+> Thank you for your quick response.
+>
+>
+>
+> Does ?cmd? shell mean MS-Windows command prompt ?
+>
+>
+>
+> I executed in Windows command prompt and the result is shown below:
+>
+>
+>
+> C:\Users\N.Morihira>pip install openpyxl
+>
+> Pip is not recognized as executable command at Windows command prompt and
+> so is Python command line.
+>
+>
+>
+>
+>
+> Best Regards,
+>
+> ---------------------
+> Naoki Morihira
+> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+> ---------------------
+>
+> *???: *Matthew Brett <matthew.brett at gmail.com>
+> *????: *2018?3?27? 13:21
+> *??: *?? ?? <naoki_morihira at outlook.jp>
+> *CC: *Brett Cannon <brett at python.org>; distutils-sig at python.org
+>
+> *??: *Re: [Distutils] Need how to install 3rd party python modules
+>
+>
+>
+> Hi,
+>
+> Brett is just saying that you should first open a "cmd" shell, and, at
+> the cmd prompt, type:
+>
+> pip install openpyxl
+>
+> Your problem (which is relatively common) is that you were typing the
+> command at the Python prompt, instead of the cmd prompt.
+>
+> Best,
+>
+> Matthew
+>
+>
+> On Tue, Mar 27, 2018 at 6:04 PM, ?? ?? <naoki_morihira at outlook.jp> wrote:
+> > Brett,
+> >
+> >
+> >
+> > Thank you for responding me.
+> >
+> > Could you tell me the e-mail address of the python-tutor ?
+> >
+> > And if you have something even a little to be a hint to resolve this
+> syntax
+> > error, it is appreciated to teach me.
+> >
+> >
+> >
+> > Best Regards,
+> >
+> > ---------------------
+> > Naoki Morihira
+> > TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+> > ---------------------
+> >
+> >
+> >
+> > ________________________________
+> > ???: Brett Cannon <brett at python.org>
+> > ????: Tuesday, March 27, 2018 9:44:57 AM
+> > ??: ?? ??
+> > CC: distutils-sig at python.org
+> > ??: Re: [Distutils] Need how to install 3rd party python modules
+> >
+> > For general help to get started with Python I would recommend the
+> > python-tutor mailing list; this one is for discussing the development of
+> how
+> > to package things in Python.
+> >
+> > But in your specific case you typed the command in Python's REPL and not
+> at
+> > the terminal. For further help please ask on python-tutor.
+> >
+> > On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp> wrote:
+> >>
+> >> I would like to install openpyxl, and
+> >>
+> >> I installed Python shown as follows:
+> >>
+> >> Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit
+> >> (Intel)] on win32
+> >>
+> >>
+> >>
+> >> But as the following situation shows, I cannot succeed installing
+> >> openpyxl.
+> >>
+> >>
+> >>
+> >> >>> pip install openpyxl
+> >>
+> >>   File "<stdin>", line 1
+> >>
+> >>     pip install openpyxl
+> >>
+> >>               ^
+> >>
+> >> SyntaxError: invalid syntax
+> >>
+> >>
+> >>
+> >> How can I succeed installing openpyxl ?
+> >>
+> >>
+> >>
+> >> Best Regards,
+> >>
+> >> ---------------------
+> >> Naoki Morihira
+> >> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+> >> ---------------------
+> >>
+> >>
+> >>
+> >> _______________________________________________
+> >> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> >> https://mail.python.org/mailman/listinfo/distutils-sig
+> >
+> >
+> > _______________________________________________
+> > Distutils-SIG maillist  -  Distutils-SIG at python.org
+> > https://mail.python.org/mailman/listinfo/distutils-sig
+> >
+>
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180328/2de20532/attachment.html>
+
+From sh at changeset.nyc  Wed Mar 28 20:18:47 2018
+From: sh at changeset.nyc (Sumana Harihareswara)
+Date: Wed, 28 Mar 2018 20:18:47 -0400
+Subject: [Distutils] PyPI/Warehouse (short) weekly report: beta,
+ pythonhosted docs, PEP 541
+Message-ID: <1522282727.855781.1319670768.3DF218AD@webmail.messagingengine.com>
+
+(A short report this week that doesn't include as much detail about
+merged PRs, infrastructure work, and so on, because I've been doing
+stuff like writing to python-list/comp.lang.python to ask for
+testing[1],  but next week's will have more.)
+The new PyPI went to beta this week![2]
+
+Now that PEP 541 is accepted, we are deciding on logistical stuff to
+implement it and help deal with name transfer requests[3].
+Cool things from the notes from the weekly Warehouse core developers'
+meeting[4] include: if your PyPI project has docs already uploaded to
+pythonhosted.org, you can now delete those docs[5]. (Further work on
+docs transition is forthcoming.) And this week and next week some of our
+team are busy with other projects, so code review and issue resolution
+will be a little slower.
+We have livechats coming up in Twitter & IRC[6] (next one is Friday the
+30th), and tomorrow I hope to speak on the OpenNews community call[7] at
+noon Eastern Time.
+You can help this week by spreading the word[8] about the new PyPI beta
+and testing it, by opining in our "needs discussion" issues[9], and by
+just being your wonderful selves. Thank you for your help and kind words
+through this whole process. It means a lot.
+More soon!
+--
+Sumana Harihareswara
+Warehouse project manager
+Changeset Consulting
+sh at changeset.nyc
+
+Links:
+
+  1. https://mail.python.org/pipermail/python-list/2018-March/thread.html#732228
+  2. https://pyfound.blogspot.com/2018/03/warehouse-all-new-pypi-is-now-in-beta.html
+  3. https://github.com/pypa/warehouse/issues/1506#issuecomment-374626455
+  4. https://wiki.python.org/psf/PackagingWG/2018-03-26-Warehouse
+  5. https://github.com/pypa/warehouse/pull/3413
+  6. https://pyfound.blogspot.com/2018/03/warehouse-all-new-pypi-is-now-in-beta.html#livechat
+  7. https://opennews.org/what/community/calls/
+  8. https://pyfound.blogspot.com/2018/03/warehouse-all-new-pypi-is-now-in-beta.html
+  9. https://github.com/pypa/warehouse/labels/needs%20discussion
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180328/529e6300/attachment.html>
+
+From aodagx at gmail.com  Wed Mar 28 23:19:21 2018
+From: aodagx at gmail.com (Atsushi Odagiri)
+Date: Thu, 29 Mar 2018 03:19:21 +0000
+Subject: [Distutils] Need how to install 3rd party python modules
+In-Reply-To: <CAP1=2W58g2Fj=Km_0wVF-9E_yTSXb3fqzGxjDAHxS8N4+BVBew@mail.gmail.com>
+References: <CY1PR0101MB08762FB6850785E58709B91491AC0@CY1PR0101MB0876.prod.exchangelabs.com>
+ <CAP1=2W4F-BREGwONj66wUNzZK9CrCmw0Nd+xHoT_hHidzH2Vgg@mail.gmail.com>
+ <BN1PR0101MB0867EDA76320D6A14B41455091AC0@BN1PR0101MB0867.prod.exchangelabs.com>
+ <CAH6Pt5o2ZbgoZmYG82jXSx-ObDD_yJGCR2xXWzxng==R+ffyBg@mail.gmail.com>
+ <BN1PR0101MB08678EB1E644979F253C699291A30@BN1PR0101MB0867.prod.exchangelabs.com>
+ <CAP1=2W58g2Fj=Km_0wVF-9E_yTSXb3fqzGxjDAHxS8N4+BVBew@mail.gmail.com>
+Message-ID: <CADp8tOro1zr6+QhNmLMo=OWvgh9nFT=f3eoBPN8XF7VaR_j5pA@mail.gmail.com>
+
+????
+
+if you are familiar with Japanese, would you like to join Japanese Python
+Community?
+Python.jp has a slack channel and you see how to join at
+https://www.python.jp/community/ .
+
+2018?3?29?(?) 2:36 Brett Cannon <brett at python.org>:
+
+> If you're on Windows the command would be `py -m pip install openpyxl`
+> (since it sounds like you didn't check the box at install time to add
+> python to your PATH), although I would suggest doing `py -m pip install
+> --user openpyxl` instead (a virtual environment would be better, but
+> explaining that is off-topic for this mailing list).
+>
+> On Tue, 27 Mar 2018 at 23:04 ?? ?? <naoki_morihira at outlook.jp> wrote:
+>
+>> Mathew,
+>>
+>>
+>>
+>> Thank you for your quick response.
+>>
+>>
+>>
+>> Does ?cmd? shell mean MS-Windows command prompt ?
+>>
+>>
+>>
+>> I executed in Windows command prompt and the result is shown below:
+>>
+>>
+>>
+>> C:\Users\N.Morihira>pip install openpyxl
+>>
+>> Pip is not recognized as executable command at Windows command prompt and
+>> so is Python command line.
+>>
+>>
+>>
+>>
+>>
+>> Best Regards,
+>>
+>> ---------------------
+>> Naoki Morihira
+>> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+>> ---------------------
+>>
+>> *???: *Matthew Brett <matthew.brett at gmail.com>
+>> *????: *2018?3?27? 13:21
+>> *??: *?? ?? <naoki_morihira at outlook.jp>
+>> *CC: *Brett Cannon <brett at python.org>; distutils-sig at python.org
+>>
+>> *??: *Re: [Distutils] Need how to install 3rd party python modules
+>>
+>>
+>>
+>> Hi,
+>>
+>> Brett is just saying that you should first open a "cmd" shell, and, at
+>> the cmd prompt, type:
+>>
+>> pip install openpyxl
+>>
+>> Your problem (which is relatively common) is that you were typing the
+>> command at the Python prompt, instead of the cmd prompt.
+>>
+>> Best,
+>>
+>> Matthew
+>>
+>>
+>> On Tue, Mar 27, 2018 at 6:04 PM, ?? ?? <naoki_morihira at outlook.jp> wrote:
+>> > Brett,
+>> >
+>> >
+>> >
+>> > Thank you for responding me.
+>> >
+>> > Could you tell me the e-mail address of the python-tutor ?
+>> >
+>> > And if you have something even a little to be a hint to resolve this
+>> syntax
+>> > error, it is appreciated to teach me.
+>> >
+>> >
+>> >
+>> > Best Regards,
+>> >
+>> > ---------------------
+>> > Naoki Morihira
+>> > TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+>> > ---------------------
+>> >
+>> >
+>> >
+>> > ________________________________
+>> > ???: Brett Cannon <brett at python.org>
+>> > ????: Tuesday, March 27, 2018 9:44:57 AM
+>> > ??: ?? ??
+>> > CC: distutils-sig at python.org
+>> > ??: Re: [Distutils] Need how to install 3rd party python modules
+>> >
+>> > For general help to get started with Python I would recommend the
+>> > python-tutor mailing list; this one is for discussing the development
+>> of how
+>> > to package things in Python.
+>> >
+>> > But in your specific case you typed the command in Python's REPL and
+>> not at
+>> > the terminal. For further help please ask on python-tutor.
+>> >
+>> > On Tue, 27 Mar 2018 at 09:42 ?? ?? <naoki_morihira at outlook.jp> wrote:
+>> >>
+>> >> I would like to install openpyxl, and
+>> >>
+>> >> I installed Python shown as follows:
+>> >>
+>> >> Python 3.6.4 (v3.6.4:d48eceb, Dec 19 2017, 06:04:45) [MSC v.1900 32 bit
+>> >> (Intel)] on win32
+>> >>
+>> >>
+>> >>
+>> >> But as the following situation shows, I cannot succeed installing
+>> >> openpyxl.
+>> >>
+>> >>
+>> >>
+>> >> >>> pip install openpyxl
+>> >>
+>> >>   File "<stdin>", line 1
+>> >>
+>> >>     pip install openpyxl
+>> >>
+>> >>               ^
+>> >>
+>> >> SyntaxError: invalid syntax
+>> >>
+>> >>
+>> >>
+>> >> How can I succeed installing openpyxl ?
+>> >>
+>> >>
+>> >>
+>> >> Best Regards,
+>> >>
+>> >> ---------------------
+>> >> Naoki Morihira
+>> >> TEL: 01181-90-6460-6265 <+81%2090-6460-6265>
+>> >> ---------------------
+>> >>
+>> >>
+>> >>
+>> >> _______________________________________________
+>> >> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> >> https://mail.python.org/mailman/listinfo/distutils-sig
+>> >
+>> >
+>> > _______________________________________________
+>> > Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> > https://mail.python.org/mailman/listinfo/distutils-sig
+>> >
+>>
+>>
+>>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180329/873dbc89/attachment-0001.html>
+
+From ncoghlan at gmail.com  Fri Mar 30 06:46:50 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Fri, 30 Mar 2018 20:46:50 +1000
+Subject: [Distutils] PEP 571: Any further manylinux2010 concerns or
+ questions?
+Message-ID: <CADiSq7d00vsno60jTY1XwKDykj1L0UqzFZvDej1BS4V_4GxXvQ@mail.gmail.com>
+
+PEP link: https://www.python.org/dev/peps/pep-0571/
+
+Thomas Kluyver has amended Mark Williams's PEP 571 to address the
+concerns & questions raised in the previous thread:
+
+* manylinux2 -> manylinux2010:
+https://github.com/python/peps/commit/70cbfda06534aedd6372f489090fdc8e1062de6e#diff-ed6b6d5f928c15489fc02dca72f4b519
+* using glibc 2.12 as a compatibility marker:
+https://github.com/python/peps/commit/d43b984e021eddc11bdbc36863c5c285b473f8a7#diff-ed6b6d5f928c15489fc02dca72f4b519
+
+(We also dropped a potentially misleading aside that could be taken as
+implying inaccurate limitations on Anaconda platform compatibility)
+
+As I expect quite a few folks will be busy for the Easter weekend, I'm
+planning to accept the PEP a week from next Monday (i.e on April 9th)
+if no new concerns or objections are raised between now and then :)
+
+Cheers,
+Nick.
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+
+From trishank.kuppusamy at datadoghq.com  Fri Mar 30 12:04:46 2018
+From: trishank.kuppusamy at datadoghq.com (Trishank Kuppusamy)
+Date: Fri, 30 Mar 2018 12:04:46 -0400
+Subject: [Distutils] PEP 571: Any further manylinux2010 concerns or
+ questions?
+In-Reply-To: <CADiSq7d00vsno60jTY1XwKDykj1L0UqzFZvDej1BS4V_4GxXvQ@mail.gmail.com>
+References: <CADiSq7d00vsno60jTY1XwKDykj1L0UqzFZvDej1BS4V_4GxXvQ@mail.gmail.com>
+Message-ID: <CAEd-exNtHFoGKjLSFPwF_fSF3QcCHCtJsjwgh0H=QXX5rfB1fQ@mail.gmail.com>
+
+Hi Nick,
+
+Long time no see --- hope everything is well on your side :)
+
+First of all, thanks Mark, Thomas, and everyone else for your hard work on
+manylinux2010 --- I'm excited about this release, as I'm sure many others
+are!
+
+This may be the wrong thread to discuss this, and I haven't looked too
+deeply into it, but are there plans to support container-specific Linux
+distros like Alpine that use musl instead of glibc? I'm guessing the answer
+is "no," but I'm curious to hear what others think on the subject.
+
+Happy Easter!
+
+Thanks,
+Trishank
+
+On Fri, Mar 30, 2018 at 6:46 AM, Nick Coghlan <ncoghlan at gmail.com> wrote:
+
+> PEP link: https://www.python.org/dev/peps/pep-0571/
+>
+> Thomas Kluyver has amended Mark Williams's PEP 571 to address the
+> concerns & questions raised in the previous thread:
+>
+> * manylinux2 -> manylinux2010:
+> https://github.com/python/peps/commit/70cbfda06534aedd6372f4
+> 89090fdc8e1062de6e#diff-ed6b6d5f928c15489fc02dca72f4b519
+> * using glibc 2.12 as a compatibility marker:
+> https://github.com/python/peps/commit/d43b984e021eddc11bdbc3
+> 6863c5c285b473f8a7#diff-ed6b6d5f928c15489fc02dca72f4b519
+>
+> (We also dropped a potentially misleading aside that could be taken as
+> implying inaccurate limitations on Anaconda platform compatibility)
+>
+> As I expect quite a few folks will be busy for the Easter weekend, I'm
+> planning to accept the PEP a week from next Monday (i.e on April 9th)
+> if no new concerns or objections are raised between now and then :)
+>
+> Cheers,
+> Nick.
+>
+> --
+> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180330/98838cca/attachment.html>
+
+From p.f.moore at gmail.com  Sat Mar 31 07:11:29 2018
+From: p.f.moore at gmail.com (Paul Moore)
+Date: Sat, 31 Mar 2018 12:11:29 +0100
+Subject: [Distutils] Beta release of pip version 10
+Message-ID: <CACac1F9Hgd09sxz+i3mmTi43B7dEsc43UE4TOu3QGhthgSXx1A@mail.gmail.com>
+
+On behalf of the PyPA, I am pleased to announce that a beta release
+10.0.0b1 of pip has just been released for testing by the community.
+We're planning on a final release in 2 weeks' time, over the weekend
+of 14/15 April.
+
+To install pip 10.0.0.b1, you can run
+
+    python -m pip install --upgrade --pre pip
+
+(obviously, you should not do this in a production environment!)
+
+We would be grateful for all testing that users could do, to ensure
+that when pip 10 is released it's as solid as we can make it.
+
+Highlights of the new release:
+
+* Python 2.6 is no longer supported - if you need pip on Python 2.6,
+you should stay on pip 9, which is the last version to support Python
+2.6.
+* Support for PEP 518, which allows projects to specify what packages
+they require in order to build from source. (PEP 518 support is
+currently limited, with full support coming in future versions - see
+the documentation for details).
+* Significant improvements in Unicode handling for non-ASCII locales on Windows.
+* A new "pip config" command.
+* The default upgrade strategy has become "only-if-needed"
+* Many bug fixes and minor improvements.
+
+In addition, the previously announced reorganisation of pip's
+internals has now taken place. Unless you are the author of code that
+imports the pip module (or a user of such code), this change will not
+affect you. If you are, please report the issue to the author of the
+affected code (refer them to
+https://mail.python.org/pipermail/distutils-sig/2017-October/031642.html
+for the details of the announcement).
+
+Please note that there is a minor issue with the NEWS file for this
+release - the new features in 10.0.0b1 are reported as being for
+"9.0.3 (2018-03-31)".
+
+If you discover any bugs while testing the new release, please report
+them at https://github.com/pypa/pip/issues.
+
+Thanks to everyone who put so much effort into the new release. Many
+of the contributions came from community members, whether in the form
+of code, participation in design discussions, or bug reports. The pip
+development team is extremely grateful to everyone in the community
+for their contributions.
+
+Thanks,
+Paul
+
+From brett at python.org  Sat Mar 31 11:18:30 2018
+From: brett at python.org (Brett Cannon)
+Date: Sat, 31 Mar 2018 15:18:30 +0000
+Subject: [Distutils] Any thoughts on supporting e.g. Alpine Linux? (was: PEP
+ 571: Any further manylinux2010 concerns or questions?
+In-Reply-To: <CAEd-exNtHFoGKjLSFPwF_fSF3QcCHCtJsjwgh0H=QXX5rfB1fQ@mail.gmail.com>
+References: <CADiSq7d00vsno60jTY1XwKDykj1L0UqzFZvDej1BS4V_4GxXvQ@mail.gmail.com>
+ <CAEd-exNtHFoGKjLSFPwF_fSF3QcCHCtJsjwgh0H=QXX5rfB1fQ@mail.gmail.com>
+Message-ID: <CAP1=2W6cgk=inxJ2dzrhC3TVdXAuZdtr6b0QCM-dbECH5VMuHw@mail.gmail.com>
+
+On Fri, Mar 30, 2018, 09:13 Trishank Kuppusamy, <
+trishank.kuppusamy at datadoghq.com> wrote:
+
+> Hi Nick,
+>
+> Long time no see --- hope everything is well on your side :)
+>
+> First of all, thanks Mark, Thomas, and everyone else for your hard work on
+> manylinux2010 --- I'm excited about this release, as I'm sure many others
+> are!
+>
+> This may be the wrong thread to discuss this,
+>
+
+It is, so I've forked the conversation ?
+
+and
+
+> I haven't looked too deeply into it, but are there plans to support
+> container-specific Linux distros like Alpine that use musl instead of glibc?
+>
+
+Are there other container-specific distros other than Alpine that people
+use widely?
+
+I'm guessing the answer is "no," but I'm curious to hear what others think
+> on the subject.
+>
+
+The discussion of distro-specific wheels has been brought up. I believe
+they are technically supported if you have your own index server, but PyPI
+doesn't, I believe, to keep an explosion of wheels people can't widely use
+down.
+
+Currently, if you want to cover all formats PyPI supports you need to
+produce 5 wheels. Adding a musl-based wheel format would bump that to 7 (as
+I assume musl supports 23 and 64-bit OSs).
+
+For me, the questions of whether to support musl-based wheels on PyPI is
+will there be enough users to justify the cost to all project maintainers
+to produce 2 more wheels per release and what would the
+manylinux-equivalent spec look like (since it would have to be generic and
+not specific to Alpine)?
+
+
+> Happy Easter!
+>
+> Thanks,
+> Trishank
+>
+> On Fri, Mar 30, 2018 at 6:46 AM, Nick Coghlan <ncoghlan at gmail.com> wrote:
+>
+>> PEP link: https://www.python.org/dev/peps/pep-0571/
+>>
+>> Thomas Kluyver has amended Mark Williams's PEP 571 to address the
+>> concerns & questions raised in the previous thread:
+>>
+>> * manylinux2 -> manylinux2010:
+>>
+>> https://github.com/python/peps/commit/70cbfda06534aedd6372f489090fdc8e1062de6e#diff-ed6b6d5f928c15489fc02dca72f4b519
+>> * using glibc 2.12 as a compatibility marker:
+>>
+>> https://github.com/python/peps/commit/d43b984e021eddc11bdbc36863c5c285b473f8a7#diff-ed6b6d5f928c15489fc02dca72f4b519
+>>
+>> (We also dropped a potentially misleading aside that could be taken as
+>> implying inaccurate limitations on Anaconda platform compatibility)
+>>
+>> As I expect quite a few folks will be busy for the Easter weekend, I'm
+>> planning to accept the PEP a week from next Monday (i.e on April 9th)
+>> if no new concerns or objections are raised between now and then :)
+>>
+>> Cheers,
+>> Nick.
+>>
+>> --
+>> Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+>> _______________________________________________
+>> Distutils-SIG maillist  -  Distutils-SIG at python.org
+>> https://mail.python.org/mailman/listinfo/distutils-sig
+>>
+>
+> _______________________________________________
+> Distutils-SIG maillist  -  Distutils-SIG at python.org
+> https://mail.python.org/mailman/listinfo/distutils-sig
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180331/4942f9de/attachment-0001.html>
+
+From donald at stufft.io  Sat Mar 31 11:40:52 2018
+From: donald at stufft.io (Donald Stufft)
+Date: Sat, 31 Mar 2018 11:40:52 -0400
+Subject: [Distutils] Any thoughts on supporting e.g. Alpine Linux? (was:
+ PEP 571: Any further manylinux2010 concerns or questions?
+In-Reply-To: <CAP1=2W6cgk=inxJ2dzrhC3TVdXAuZdtr6b0QCM-dbECH5VMuHw@mail.gmail.com>
+References: <CADiSq7d00vsno60jTY1XwKDykj1L0UqzFZvDej1BS4V_4GxXvQ@mail.gmail.com>
+ <CAEd-exNtHFoGKjLSFPwF_fSF3QcCHCtJsjwgh0H=QXX5rfB1fQ@mail.gmail.com>
+ <CAP1=2W6cgk=inxJ2dzrhC3TVdXAuZdtr6b0QCM-dbECH5VMuHw@mail.gmail.com>
+Message-ID: <56E864AD-1043-49F7-AC19-5F3B0CA39285@stufft.io>
+
+
+> On Mar 31, 2018, at 11:18 AM, Brett Cannon <brett at python.org> wrote:
+> 
+> The discussion of distro-specific wheels has been brought up. I believe they are technically supported if you have your own index server, but PyPI doesn't, I believe, to keep an explosion of wheels people can't widely use down.
+> 
+> Currently, if you want to cover all formats PyPI supports you need to produce 5 wheels. Adding a musl-based wheel format would bump that to 7 (as I assume musl supports 23 and 64-bit OSs).
+> 
+> For me, the questions of whether to support musl-based wheels on PyPI is will there be enough users to justify the cost to all project maintainers to produce 2 more wheels per release and what would the manylinux-equivalent spec look like (since it would have to be generic and not specific to Alpine)?
+
+
+I don?t think PyPI has any reason not to add more possible wheel variants, ultimately it comes down to the authors to decide which variants it makes sense to support. A MUSL version of manylinux might be very reasonable, or it might be crazy hard to nail down. I also don?t think there?s any reason we can?t have a PEP that figured out a standard format for distro specific wheels, and just let people produce alpine linux specific wheels (authors could just not produce say, ubuntu specific wheels and say they?re already covered by manyinux, or they could produce ubuntu specific if they want to rely on apt-get installed C libraries).
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180331/9ae8660e/attachment.html>
+
+From ncoghlan at gmail.com  Sat Mar 31 23:06:47 2018
+From: ncoghlan at gmail.com (Nick Coghlan)
+Date: Sun, 1 Apr 2018 13:06:47 +1000
+Subject: [Distutils] Any thoughts on supporting e.g. Alpine Linux? (was:
+ PEP 571: Any further manylinux2010 concerns or questions?
+In-Reply-To: <CAP1=2W6cgk=inxJ2dzrhC3TVdXAuZdtr6b0QCM-dbECH5VMuHw@mail.gmail.com>
+References: <CADiSq7d00vsno60jTY1XwKDykj1L0UqzFZvDej1BS4V_4GxXvQ@mail.gmail.com>
+ <CAEd-exNtHFoGKjLSFPwF_fSF3QcCHCtJsjwgh0H=QXX5rfB1fQ@mail.gmail.com>
+ <CAP1=2W6cgk=inxJ2dzrhC3TVdXAuZdtr6b0QCM-dbECH5VMuHw@mail.gmail.com>
+Message-ID: <CADiSq7cGO5rA1SmRMKaoxNuA8QQLZ-rdBPKu71ahnQrTG=orLw@mail.gmail.com>
+
+On 1 April 2018 at 01:18, Brett Cannon <brett at python.org> wrote:
+
+>
+>
+> On Fri, Mar 30, 2018, 09:13 Trishank Kuppusamy, <
+> trishank.kuppusamy at datadoghq.com> wrote:
+>
+>> Hi Nick,
+>>
+>> Long time no see --- hope everything is well on your side :)
+>>
+>> First of all, thanks Mark, Thomas, and everyone else for your hard work
+>> on manylinux2010 --- I'm excited about this release, as I'm sure many
+>> others are!
+>>
+>> This may be the wrong thread to discuss this,
+>>
+>
+> It is, so I've forked the conversation ?
+>
+> and
+>
+>> I haven't looked too deeply into it, but are there plans to support
+>> container-specific Linux distros like Alpine that use musl instead of glibc?
+>>
+>
+> Are there other container-specific distros other than Alpine that people
+> use widely?
+>
+> I'm guessing the answer is "no," but I'm curious to hear what others think
+>> on the subject.
+>>
+>
+> The discussion of distro-specific wheels has been brought up. I believe
+> they are technically supported if you have your own index server, but PyPI
+> doesn't, I believe, to keep an explosion of wheels people can't widely use
+> down.
+>
+
+The main reason PyPI doesn't currently support distro specific wheels is
+because there isn't a compatibility tagging spec for them that's reasonable
+to use on a public index server - they currently end up being tagged as
+generic "linux" wheels. You can live with that on a private index server
+like the one that https://galaxyproject.org/ runs, but it would be
+incredibly confusing on PyPI.
+
+As far as I know,
+https://mail.python.org/pipermail/distutils-sig/2015-July/026617.html is
+still the most complete write-up we have of a potential way to fix that,
+which is to:
+
+1. extend the default Linux platform tag to include the ID and VERSION_ID
+fields from /etc/os-release (credit to Galaxy Project's Nate Coraor for
+that core concept)
+2. define a config file under /etc/python/ that distros can use to change
+both the build tag (e.g. allowing CentOS users to emit RHEL compatible
+wheels, or Ubuntu users to emit Debian compatible ones), and a list of
+binary compatible distro tags (e.g. allowing CentOS to consume RHEL tagged
+wheels, Ubuntu to consume Debian tagged wheels, and other musl based
+distros to consume Alpine tagged wheels)
+3. define an equivalent per-virtualenv file to override the settings from
+(2)
+4. update pip/setuptools/twine/warehouse/etc to account for the new
+compatibility tag variant
+
+One useful aspect here is that older clients will just ignored the new tags
+as "not a match", which means there shouldn't be any significant backwards
+compatibility hurdles.
+
+
+> Currently, if you want to cover all formats PyPI supports you need to
+> produce 5 wheels. Adding a musl-based wheel format would bump that to 7 (as
+> I assume musl supports 23 and 64-bit OSs).
+>
+> For me, the questions of whether to support musl-based wheels on PyPI is
+> will there be enough users to justify the cost to all project maintainers
+> to produce 2 more wheels per release and what would the
+> manylinux-equivalent spec look like (since it would have to be generic and
+> not specific to Alpine)?
+>
+
+Honestly, I think the main benefit of heading down this road will be to
+allow folks to cache their custom wheel builds more effectively, so I'm not
+especially worried about making it generic (beyond the platform level
+config file suggested above).
+
+That said, if there were to be a significant growth in non-manylinux Linux
+wheels on PyPI, I'd expect them to be for the official Docker Inc base
+Python images, which are Alpine based, and hence can't use the glibc-based
+manylinux binaries.
+
+Cheers,
+Nick.
+
+-- 
+Nick Coghlan   |   ncoghlan at gmail.com   |   Brisbane, Australia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <http://mail.python.org/pipermail/distutils-sig/attachments/20180401/417ebf8b/attachment.html>
+

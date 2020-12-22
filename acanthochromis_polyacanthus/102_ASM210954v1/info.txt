@@ -1,0 +1,6 @@
+species	acanthochromis_polyacanthus
+assembly	ASM210954v1
+sift	
+polyphen	
+source_genebuild	2018-07
+source_assembly	ASM210954v1

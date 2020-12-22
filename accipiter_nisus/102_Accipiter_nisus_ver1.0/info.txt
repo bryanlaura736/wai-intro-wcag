@@ -1,0 +1,6 @@
+species	accipiter_nisus
+assembly	Accipiter_nisus_ver1.0
+sift	
+polyphen	
+source_genebuild	2019-09
+source_assembly	Accipiter_nisus_ver1.0

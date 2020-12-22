@@ -1,0 +1,6 @@
+species	ailuropoda_melanoleuca
+assembly	ailMel1
+sift	
+polyphen	
+source_genebuild	2010-10
+source_assembly	ailMel1
